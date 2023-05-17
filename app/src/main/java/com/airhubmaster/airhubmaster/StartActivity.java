@@ -19,7 +19,7 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         new Handler().postDelayed(() -> {
-            startActivity(new Intent(StartActivity.this, MainActivity.class));
+            startActivity(new Intent(StartActivity.this, RegisterActivity.class));
             finish();
         },3000);
     }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AirHubMaster</string>
+    <string name="loginLink"><a href="">Jeśli posiadasz konto, zaloguj się.</a></string>
+    <string name="registerLink"><a href="">Jeśli nie posiadasz konta, zarejestruj się.</a></string>
 </resources>
