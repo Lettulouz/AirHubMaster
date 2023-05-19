@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/personnelIcon"
+        android:icon="@drawable/baseline_supervisor_account_24"
+        android:title="Personnel" />
+    <item
+        android:id="@+id/mapIcon"
+        android:icon="@drawable/baseline_travel_explore_24"
+        android:title="Map" />
+    <item
+        android:id="@+id/serviceIcon"
+        android:icon="@drawable/baseline_settings_suggest_24"
+        android:title="Service" />
+    <item
+        android:id="@+id/planeIcon"
+        android:icon="@drawable/baseline_airplanemode_active_24"
+        android:title="Plane" />
+</menu>

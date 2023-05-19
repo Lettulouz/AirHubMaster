@@ -59,6 +59,9 @@ public class LoginActivity extends AppCompatActivity {
         if (Objects.requireNonNull(inputLogin.getText()).toString().equals("admin") &&
                 Objects.requireNonNull(inputPassword.getText()).toString().equals("admin")) {
             Toast.makeText(LoginActivity.this, messageCorrectLoginIn, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+            startActivity(intent);
+            finish();
         } else {
             inputLoginLayout.setErrorEnabled(true);
             inputLoginLayout.setError(messageAuthentication);

@@ -91,6 +91,7 @@
                     android:id="@+id/inputFirstName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:textColor="@color/black" />
 
@@ -115,6 +116,7 @@
                     android:id="@+id/inputLastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:textColor="@color/black" />
 
@@ -139,6 +141,7 @@
                     android:id="@+id/inputLoginRegister"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:textColor="@color/black" />
 
@@ -163,6 +166,7 @@
                     android:id="@+id/inputEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:textColor="@color/black" />
 
@@ -188,6 +192,7 @@
                     android:id="@+id/inputPasswordRegister"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="textPassword"
                     android:maxLines="1"
                     android:textColor="@color/black" />
 
@@ -213,6 +218,7 @@
                     android:id="@+id/inputPasswordRegisterRepeat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="textPassword"
                     android:maxLines="1"
                     android:textColor="@color/black" />
 
