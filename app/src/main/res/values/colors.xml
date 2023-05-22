@@ -8,4 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
+    <color name="level_active_color">#4CAF50</color>
+    <color name="level_active_stroke_color">#388E3C</color>
+    <color name="level_inactive_color">#CCCCCC</color>
+    <color name="level_inactive_stroke_color">#999999</color>
 </resources>
