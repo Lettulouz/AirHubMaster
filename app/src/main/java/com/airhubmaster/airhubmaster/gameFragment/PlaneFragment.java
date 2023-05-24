@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -20,7 +19,7 @@ import com.airhubmaster.airhubmaster.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.airhubmaster.airhubmaster.dto.Plane;
+import com.airhubmaster.airhubmaster.dto.game.Plane;
 
 public class PlaneFragment extends Fragment {
 
@@ -28,8 +27,7 @@ public class PlaneFragment extends Fragment {
     private PlaneAdapter adapter;
     private List<Plane> planeList;
 
-    public PlaneFragment() {
-    }
+    public PlaneFragment() { }
 
     public static PlaneFragment newInstance() {
         PlaneFragment fragment = new PlaneFragment();
@@ -57,7 +55,14 @@ public class PlaneFragment extends Fragment {
         planeList.add(new Plane("Samolot A", 0));
         planeList.add(new Plane("Samolot B", 0));
         planeList.add(new Plane("Samolot C", 0));
-
+        planeList.add(new Plane("Samolot B", 0));
+        planeList.add(new Plane("Samolot C", 0));
+        planeList.add(new Plane("Samolot B", 0));
+        planeList.add(new Plane("Samolot C", 0));
+        planeList.add(new Plane("Samolot B", 0));
+        planeList.add(new Plane("Samolot C", 0));
+        planeList.add(new Plane("Samolot B", 0));
+        planeList.add(new Plane("Samolot C", 0));
         adapter = new PlaneAdapter(planeList);
         recyclerView.setAdapter(adapter);
 

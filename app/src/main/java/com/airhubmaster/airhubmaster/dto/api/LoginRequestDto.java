@@ -1,9 +1,9 @@
-package com.airhubmaster.airhubmaster.dto;
+package com.airhubmaster.airhubmaster.dto.api;
 
 /**
- * The helper class responsible for storing the entered data from the user's login view
+ * The helper class responsible for data mapping from the user's login inputs
  */
-public class LoginRequest {
+public class LoginRequestDto {
 
     /**
      * Variable declaration
@@ -27,7 +27,7 @@ public class LoginRequest {
         this.password = password;
     }
 
-    public LoginRequest(String loginOrEmail, String password) {
+    public LoginRequestDto(String loginOrEmail, String password) {
         this.loginOrEmail = loginOrEmail;
         this.password = password;
     }

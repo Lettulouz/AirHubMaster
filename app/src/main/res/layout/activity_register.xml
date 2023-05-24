@@ -82,7 +82,7 @@
                 android:layout_marginEnd="20dp"
                 android:hint="Wpisz imię"
                 app:counterEnabled="true"
-                app:counterMaxLength="20"
+                app:counterMaxLength="70"
                 app:errorEnabled="true"
                 app:errorTextColor="@color/red"
                 app:startIconDrawable="@drawable/baseline_person_24">
@@ -107,7 +107,7 @@
                 android:layout_marginEnd="20dp"
                 android:hint="Wpisz nazwisko"
                 app:counterEnabled="true"
-                app:counterMaxLength="20"
+                app:counterMaxLength="70"
                 app:errorEnabled="true"
                 app:errorTextColor="@color/red"
                 app:startIconDrawable="@drawable/baseline_person_24">
@@ -132,7 +132,7 @@
                 android:layout_marginEnd="20dp"
                 android:hint="Wpisz login"
                 app:counterEnabled="true"
-                app:counterMaxLength="20"
+                app:counterMaxLength="30"
                 app:errorEnabled="true"
                 app:errorTextColor="@color/red"
                 app:startIconDrawable="@drawable/baseline_person_24">
@@ -157,7 +157,7 @@
                 android:layout_marginEnd="20dp"
                 android:hint="Wpisz email"
                 app:counterEnabled="true"
-                app:counterMaxLength="20"
+                app:counterMaxLength="100"
                 app:errorEnabled="true"
                 app:errorTextColor="@color/red"
                 app:startIconDrawable="@drawable/baseline_email_24">
@@ -182,7 +182,7 @@
                 android:layout_marginEnd="20dp"
                 android:hint="Wpisz hasło"
                 app:counterEnabled="true"
-                app:counterMaxLength="20"
+                app:counterMaxLength="30"
                 app:endIconMode="password_toggle"
                 app:errorEnabled="true"
                 app:errorTextColor="@color/red"
@@ -208,7 +208,7 @@
                 android:layout_marginEnd="20dp"
                 android:hint="Powtórz hasło"
                 app:counterEnabled="true"
-                app:counterMaxLength="20"
+                app:counterMaxLength="30"
                 app:endIconMode="password_toggle"
                 app:errorEnabled="true"
                 app:errorTextColor="@color/red"

@@ -1,6 +1,7 @@
-package com.airhubmaster.airhubmaster.dto;
+package com.airhubmaster.airhubmaster.dto.game;
 
 public class Plane {
+
     private String name;
     private int upgradeLevel;
 
@@ -16,6 +17,7 @@ public class Plane {
     }
 
     public String getName;
+
     public String getName() {
         return name;
     }
