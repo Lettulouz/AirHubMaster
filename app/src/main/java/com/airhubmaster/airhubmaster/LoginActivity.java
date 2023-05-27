@@ -2,6 +2,7 @@ package com.airhubmaster.airhubmaster;
 
 import static com.airhubmaster.airhubmaster.utils.Constans.MESSAGE_AUTHENTICATION;
 import static com.airhubmaster.airhubmaster.utils.Constans.MESSAGE_CORRECT_LOGIN_IN;
+import static com.airhubmaster.airhubmaster.utils.Constans.MESSAGE_ERROR_PREFERENCES_LOGIN;
 import static com.airhubmaster.airhubmaster.utils.Constans.MESSAGE_ERROR_STANDARD;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airhubmaster.airhubmaster.dto.api.FieldMessageErrorDto;
+import com.airhubmaster.airhubmaster.dto.api.RefreshRequestDto;
 import com.airhubmaster.airhubmaster.dto.api.StandardMessageErrorDto;
 import com.airhubmaster.airhubmaster.dto.api.LoginRequestDto;
 import com.airhubmaster.airhubmaster.dto.api.LoginResponseDto;
@@ -75,6 +77,9 @@ public class LoginActivity extends AppCompatActivity {
 
     //==============================================================================================
 
+    /**
+     * The method responsible for logging the user into the application
+     */
     private void login() {
         if (inputLogin.getText().toString() != null && inputPassword.getText().toString() != null) {
             String login = inputLogin.getText().toString();
@@ -106,7 +111,6 @@ public class LoginActivity extends AppCompatActivity {
                         loginResponseDto = gson.fromJson(response.body().string(), LoginResponseDto.class);
                         userLocalStore.storeUserData(loginResponseDto);
                         userLocalStore.setUserLoggedIn(true);
-                        userLocalStore.clearUserData();
                         runOnUiThread(() -> {
                             Toast.makeText(LoginActivity.this,
                                     MESSAGE_CORRECT_LOGIN_IN, Toast.LENGTH_SHORT).show();
@@ -156,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
     //==============================================================================================
 
     /**
-     * A method class responsible for setting the span class for inputs
+     * A method responsible for setting the span class for inputs
      */
     private void setSpanClass() {
         inputLoginLayout.setErrorEnabled(true);
@@ -188,6 +192,49 @@ public class LoginActivity extends AppCompatActivity {
      * @return logged user data
      */
     private boolean authenticate() {
+        if (userLocalStore.getLoggedInUser() != null) {
+            RefreshRequestDto refreshRequestDto = new RefreshRequestDto(userLocalStore.getJwtUserToken(),
+                    userLocalStore.getRefreshUserToken());
+
+            OkHttpClient client = new OkHttpClient();
+            String url = "http://airhubmaster.miloszgilga.pl/api/v1/auth/refresh";
+            RequestBody body = RequestBody.create(gson.toJson(refreshRequestDto), Constans.JSON);
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .header("Connection", "close")
+                    .header("Accept-language", "pl")
+                    .header("User-Agent", "mobile")
+                    .build();
+
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    e.printStackTrace();
+                    userLocalStore.clearUserData();
+                    Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                    runOnUiThread(() -> Toast.makeText(LoginActivity.this,
+                            MESSAGE_ERROR_STANDARD, Toast.LENGTH_SHORT).show());
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    if (response.code() == 200) {
+                        loginResponseDto = gson.fromJson(response.body().string(), LoginResponseDto.class);
+                        userLocalStore.storeUserData(loginResponseDto);
+                    } else {
+                        userLocalStore.clearUserData();
+                        Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                        runOnUiThread(() -> Toast.makeText(LoginActivity.this,
+                                MESSAGE_ERROR_PREFERENCES_LOGIN, Toast.LENGTH_SHORT).show());
+                    }
+                }
+            });
+        }
         return userLocalStore.getLoggedInUser() != null;
     }
 }
