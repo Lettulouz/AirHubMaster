@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">AirHubMaster</string>
     <string name="loginLink"><a href="">Jeśli posiadasz konto, zaloguj się.</a></string>
-    <string name="registerLink"><a href="">Jeśli nie posiadasz konta, zarejestruj się.</a></string>
+    <string name="registerLink"><a href="">Jeśli nie posiadasz konta, zarejestruj się</a></string>
+    <string name="activateLink"><a href="">aktywuj zarejestrowane konto.</a></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="upgrade_level">Poziom ulepszenia: %1$d</string>

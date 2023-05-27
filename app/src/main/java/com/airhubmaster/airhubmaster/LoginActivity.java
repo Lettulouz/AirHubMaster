@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     Button buttonLogin;
     TextView registerLink;
+    TextView activateLink;
     TextInputEditText inputLogin;
     TextInputEditText inputPassword;
     TextInputLayout inputLoginLayout;
@@ -67,6 +68,11 @@ public class LoginActivity extends AppCompatActivity {
         inputLoginLayout = findViewById(R.id.textLoginLayout);
         inputPasswordLayout = findViewById(R.id.textPasswordLayout);
         registerLink = findViewById(R.id.textViewRegisterLink);
+        activateLink = findViewById(R.id.textViewActivateLink);
+        activateLink.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, ActivateActivity.class);
+            startActivity(intent);
+        });
         registerLink.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
