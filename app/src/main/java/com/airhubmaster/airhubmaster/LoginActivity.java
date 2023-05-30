@@ -4,6 +4,7 @@ import static com.airhubmaster.airhubmaster.utils.Constans.MESSAGE_AUTHENTICATIO
 import static com.airhubmaster.airhubmaster.utils.Constans.MESSAGE_CORRECT_LOGIN_IN;
 import static com.airhubmaster.airhubmaster.utils.Constans.MESSAGE_ERROR_PREFERENCES_LOGIN;
 import static com.airhubmaster.airhubmaster.utils.Constans.MESSAGE_ERROR_STANDARD;
+import static com.airhubmaster.airhubmaster.utils.Constans.URL_SERVER;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -93,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
             LoginRequestDto loginRequestDto = new LoginRequestDto(login, password);
 
             OkHttpClient client = new OkHttpClient();
-            String url = "http://airhubmaster.miloszgilga.pl/api/v1/auth/login";
+            String url = URL_SERVER + "api/v1/auth/login";
             RequestBody body = RequestBody.create(gson.toJson(loginRequestDto), Constans.JSON);
             Request request = new Request.Builder()
                     .url(url)
@@ -203,7 +204,7 @@ public class LoginActivity extends AppCompatActivity {
                     userLocalStore.getRefreshUserToken());
 
             OkHttpClient client = new OkHttpClient();
-            String url = "http://airhubmaster.miloszgilga.pl/api/v1/auth/refresh";
+            String url = URL_SERVER + "api/v1/auth/refresh";
             RequestBody body = RequestBody.create(gson.toJson(refreshRequestDto), Constans.JSON);
             Request request = new Request.Builder()
                     .url(url)
