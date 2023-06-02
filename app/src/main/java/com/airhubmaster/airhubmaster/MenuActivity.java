@@ -11,8 +11,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.animation.ValueAnimator;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.airhubmaster.airhubmaster.databinding.ActivityMenuBinding;
@@ -115,6 +120,24 @@ public class MenuActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    //==============================================================================================
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.currency_top_menu, menu);
+        MenuItem itemButton = menu.findItem(R.id.buttonCurrencyBar);
+        View view = itemButton.getActionView();
+        Button button = view.findViewById(R.id.currencyButton);
+        ValueAnimator animator = ValueAnimator.ofInt(0, 69420);
+        animator.addUpdateListener(valueAnimator -> {
+            animator.setDuration(1500);
+            button.setText(valueAnimator.getAnimatedValue().toString());
+        });
+        animator.start();
+        return super.onCreateOptionsMenu(menu);
     }
 
     //==============================================================================================
