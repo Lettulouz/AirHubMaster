@@ -49,6 +49,7 @@ public class ActivateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activate);
+        getSupportActionBar().hide();
         buttonActivate = findViewById(R.id.buttonActivate);
         inputToken = findViewById(R.id.inputActivate);
         inputTokenLayout = findViewById(R.id.textActivateLayout);

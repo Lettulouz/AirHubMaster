@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().hide();
         userLocalStore = UserLocalStore.getInstance(this);
         buttonLogin = findViewById(R.id.buttonLogin);
         inputLogin = findViewById(R.id.inputLogin);
