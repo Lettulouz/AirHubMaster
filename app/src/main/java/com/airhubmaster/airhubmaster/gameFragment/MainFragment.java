@@ -12,21 +12,16 @@ import android.view.ViewGroup;
 
 import com.airhubmaster.airhubmaster.R;
 
-public class PersonnelFragment extends Fragment {
+public class MainFragment extends Fragment {
 
-    public PersonnelFragment() {
+    public MainFragment() {
     }
 
-    public static PersonnelFragment newInstance(String param1, String param2) {
-        PersonnelFragment fragment = new PersonnelFragment();
+    public static MainFragment newInstance(String param1, String param2) {
+        MainFragment fragment = new MainFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
@@ -35,8 +30,13 @@ public class PersonnelFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_personnel, container, false);
+        return inflater.inflate(R.layout.fragment_main, container, false);
     }
 }

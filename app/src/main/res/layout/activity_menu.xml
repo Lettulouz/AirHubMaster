@@ -30,6 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:elevation="0dp"
+                app:itemIconTint="#FADA5A"
+                app:itemTextColor="#FADA5A"
                 app:menu="@menu/bottom_nav_menu" />
 
         </com.google.android.material.bottomappbar.BottomAppBar>
@@ -39,15 +41,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#FADA5A"
+            android:labelFor="@id/buttonMenuMain"
             android:src="@drawable/baseline_airplane_ticket_24"
+            android:tooltipText="Airport"
             app:borderWidth="0dp"
             app:layout_anchor="@id/bottomAppBar"
             app:tint="#808080" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <FrameLayout
-        android:id="@+id/frameLayoutMenu"
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
@@ -55,6 +59,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/frameLayoutMenu"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/sideMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:menu="@menu/side_nav_menu">
+
+        </com.google.android.material.navigation.NavigationView>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
