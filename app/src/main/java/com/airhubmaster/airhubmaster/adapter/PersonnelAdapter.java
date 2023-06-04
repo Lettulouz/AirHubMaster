@@ -33,8 +33,13 @@ public class PersonnelAdapter extends RecyclerView.Adapter<PersonnelViewHolder> 
         holder.personCategory.setText(personnel.getCategory());
         holder.personName.setText(personnel.getName());
         holder.expandButton.setOnClickListener(v -> {
-            boolean isExpanded = holder.personStatsLayout.getVisibility() == View.VISIBLE;
-            holder.personStatsLayout.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
+            if (holder.personStatsLayout.getVisibility() == View.GONE) {
+                holder.personStatsLayout.setVisibility(View.VISIBLE);
+                holder.expandButton.setBackgroundResource(R.drawable.collapse_icon);
+            } else {
+                holder.personStatsLayout.setVisibility(View.GONE);
+                holder.expandButton.setBackgroundResource(R.drawable.expand_icon);
+            }
         });
         holder.fieldD.setText("D  " + personnel.getExperience());
         holder.fieldU.setText("U  " + personnel.getSkills());

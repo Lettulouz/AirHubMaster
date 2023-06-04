@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airhubmaster.airhubmaster.R;
 
 public class PersonnelViewHolder extends RecyclerView.ViewHolder {
+
     ImageView personIcon;
     public TextView personCategory;
     public TextView personName;
