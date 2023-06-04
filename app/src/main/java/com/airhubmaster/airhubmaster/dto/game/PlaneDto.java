@@ -1,12 +1,18 @@
 package com.airhubmaster.airhubmaster.dto.game;
 
-public class Plane {
+/**
+ * A simple class to map planes data
+ */
+public class PlaneDto {
 
+    /**
+     * Variable declaration
+     */
     private String name;
     private String category;
     private int upgradeLevel;
 
-    public Plane(String name, String category, int upgradeLevel) {
+    public PlaneDto(String name, String category, int upgradeLevel) {
         this.category = category;
         this.name = name;
         this.upgradeLevel = upgradeLevel;
@@ -18,7 +24,6 @@ public class Plane {
         }
     }
 
-    // Poprawione deklaracje poniżej
     public String getName() {
         return name;
     }

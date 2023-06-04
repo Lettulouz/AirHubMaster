@@ -4,14 +4,21 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airhubmaster.airhubmaster.R;
 
+/**
+ * A ViewHolder containing the single item in the list for the personnel
+ */
 public class PersonnelViewHolder extends RecyclerView.ViewHolder {
 
+    /**
+     * Variable declaration
+     */
     ImageView personIcon;
     public TextView personCategory;
     public TextView personName;

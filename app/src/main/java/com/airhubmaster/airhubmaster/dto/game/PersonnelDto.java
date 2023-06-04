@@ -1,6 +1,13 @@
 package com.airhubmaster.airhubmaster.dto.game;
 
-public class Personnel {
+/**
+ * A simple class to map personnel data
+ */
+public class PersonnelDto {
+
+    /**
+     * Variable declaration
+     */
     private String name;
     private String category;
     private int experience;
@@ -8,7 +15,7 @@ public class Personnel {
     private int cooperation;
     private int rebelliousness;
 
-    public Personnel(String name, String category, int experience, int skills, int cooperation, int rebelliousness) {
+    public PersonnelDto(String name, String category, int experience, int skills, int cooperation, int rebelliousness) {
         this.name = name;
         this.category = category;
         this.experience = experience;

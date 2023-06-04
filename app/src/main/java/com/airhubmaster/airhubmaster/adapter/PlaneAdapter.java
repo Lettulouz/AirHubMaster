@@ -3,25 +3,28 @@ package com.airhubmaster.airhubmaster.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airhubmaster.airhubmaster.R;
-import com.airhubmaster.airhubmaster.dto.game.Plane;
+import com.airhubmaster.airhubmaster.dto.game.PlaneDto;
 import com.airhubmaster.airhubmaster.viewHolder.PlaneViewHolder;
 
 import java.util.List;
 
+/**
+ * An adapter that provides data binding from the Plane class
+ */
 public class PlaneAdapter extends RecyclerView.Adapter<PlaneViewHolder> {
 
-    private List<Plane> planes;
+    /**
+     * Variable declaration
+     */
+    private List<PlaneDto> planeDtos;
 
-    public PlaneAdapter(List<Plane> planes) {
-        this.planes = planes;
+    public PlaneAdapter(List<PlaneDto> planeDtos) {
+        this.planeDtos = planeDtos;
     }
 
     @Override
@@ -32,10 +35,10 @@ public class PlaneAdapter extends RecyclerView.Adapter<PlaneViewHolder> {
 
     @Override
     public void onBindViewHolder(PlaneViewHolder holder, int position) {
-        Plane plane = planes.get(position);
-        holder.planeName.setText(plane.getName());
-        holder.planeCategory.setText(plane.getCategory());
-        holder.upgradeLevel.setText(holder.itemView.getContext().getString(R.string.upgrade_level, plane.getUpgradeLevel()));
+        PlaneDto planeDto = planeDtos.get(position);
+        holder.planeName.setText(planeDto.getName());
+        holder.planeCategory.setText(planeDto.getCategory());
+        holder.upgradeLevel.setText(holder.itemView.getContext().getString(R.string.upgrade_level, planeDto.getUpgradeLevel()));
         holder.expandButton.setOnClickListener(v -> {
             if (holder.upgradeLayout.getVisibility() == View.GONE) {
                 holder.upgradeLayout.setVisibility(View.VISIBLE);
@@ -47,12 +50,12 @@ public class PlaneAdapter extends RecyclerView.Adapter<PlaneViewHolder> {
         });
 
         holder.itemView.findViewById(R.id.upgrade_button).setOnClickListener(v -> {
-            plane.upgrade();
-            holder.upgradeLevel.setText(holder.itemView.getContext().getString(R.string.upgrade_level, plane.getUpgradeLevel()));
-            updateLevelImages(holder, plane.getUpgradeLevel());
+            planeDto.upgrade();
+            holder.upgradeLevel.setText(holder.itemView.getContext().getString(R.string.upgrade_level, planeDto.getUpgradeLevel()));
+            updateLevelImages(holder, planeDto.getUpgradeLevel());
         });
 
-        updateLevelImages(holder, plane.getUpgradeLevel());
+        updateLevelImages(holder, planeDto.getUpgradeLevel());
     }
 
     private void updateLevelImages(PlaneViewHolder holder, int level) {
@@ -64,11 +67,11 @@ public class PlaneAdapter extends RecyclerView.Adapter<PlaneViewHolder> {
 
     @Override
     public int getItemCount() {
-        return planes.size();
+        return planeDtos.size();
     }
 
-    public void updatePlanes(List<Plane> planes) {
-        this.planes = planes;
+    public void updatePlanes(List<PlaneDto> planeDtos) {
+        this.planeDtos = planeDtos;
         notifyDataSetChanged();
     }
 }

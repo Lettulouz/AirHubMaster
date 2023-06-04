@@ -15,8 +15,14 @@ import com.airhubmaster.airhubmaster.R;
 
 import java.util.List;
 
+/**
+ * An adapter that provides data binding from the Category class
+ */
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
+    /**
+     * Variable declaration
+     */
     private List<String> categories;
     private Context context;
     private int selectedIndex = -1;

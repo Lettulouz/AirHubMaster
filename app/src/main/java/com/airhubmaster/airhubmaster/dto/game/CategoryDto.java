@@ -1,9 +1,16 @@
 package com.airhubmaster.airhubmaster.dto.game;
 
-public class Category {
+/**
+ * A simple class to map category data
+ */
+public class CategoryDto {
+
+    /**
+     * Variable declaration
+     */
     private String name;
 
-    public Category(String name) {
+    public CategoryDto(String name) {
         this.name = name;
     }
 

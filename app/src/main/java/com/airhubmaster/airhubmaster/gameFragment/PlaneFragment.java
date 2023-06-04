@@ -2,29 +2,32 @@ package com.airhubmaster.airhubmaster.gameFragment;
 
 import com.airhubmaster.airhubmaster.adapter.CategoryAdapter;
 import com.airhubmaster.airhubmaster.adapter.PlaneAdapter;
-import com.airhubmaster.airhubmaster.dto.game.Plane;
+import com.airhubmaster.airhubmaster.dto.game.PlaneDto;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.airhubmaster.airhubmaster.R;
-import com.airhubmaster.airhubmaster.adapter.PlaneAdapter;
 
-public class PlaneFragment extends Fragment{
+import com.airhubmaster.airhubmaster.R;
+
+public class PlaneFragment extends Fragment {
     private RecyclerView recyclerView;
     private PlaneAdapter adapter;
-    private List<Plane> planeList;
+    private List<PlaneDto> planeDtoList;
     private RecyclerView recyclerViewHorizontal;
     private CategoryAdapter categoryAdapter;
     private List<String> categories;
 
-    public PlaneFragment() { }
+    public PlaneFragment() {
+    }
 
     public static PlaneFragment newInstance() {
         PlaneFragment fragment = new PlaneFragment();
@@ -64,20 +67,20 @@ public class PlaneFragment extends Fragment{
         recyclerViewHorizontal.setAdapter(categoryAdapter);
 
 
-        planeList = new ArrayList<>();
+        planeDtoList = new ArrayList<>();
         // dodaj samoloty do listy
-        planeList.add(new Plane("Samolot A","Kategoria1", 0));
-        planeList.add(new Plane("Samolot B", "Kategoria2", 0));
-        planeList.add(new Plane("Samolot C", "Kategoria3", 0));
-        planeList.add(new Plane("Samolot B", "Kategoria4", 0));
-        planeList.add(new Plane("Samolot C", "Kategoria5", 0));
-        planeList.add(new Plane("Samolot B", "Kategoria1", 0));
-        planeList.add(new Plane("Samolot C", "Kategoria2", 0));
-        planeList.add(new Plane("Samolot B", "Kategoria3", 0));
-        planeList.add(new Plane("Samolot C", "Kategoria4", 0));
-        planeList.add(new Plane("Samolot B", "Kategoria5", 0));
-        planeList.add(new Plane("Samolot C", "Kategoria1", 0));
-        adapter = new PlaneAdapter(planeList);
+        planeDtoList.add(new PlaneDto("Samolot A", "Kategoria1", 0));
+        planeDtoList.add(new PlaneDto("Samolot B", "Kategoria2", 0));
+        planeDtoList.add(new PlaneDto("Samolot C", "Kategoria3", 0));
+        planeDtoList.add(new PlaneDto("Samolot B", "Kategoria4", 0));
+        planeDtoList.add(new PlaneDto("Samolot C", "Kategoria5", 0));
+        planeDtoList.add(new PlaneDto("Samolot B", "Kategoria1", 0));
+        planeDtoList.add(new PlaneDto("Samolot C", "Kategoria2", 0));
+        planeDtoList.add(new PlaneDto("Samolot B", "Kategoria3", 0));
+        planeDtoList.add(new PlaneDto("Samolot C", "Kategoria4", 0));
+        planeDtoList.add(new PlaneDto("Samolot B", "Kategoria5", 0));
+        planeDtoList.add(new PlaneDto("Samolot C", "Kategoria1", 0));
+        adapter = new PlaneAdapter(planeDtoList);
         recyclerView.setAdapter(adapter);
 
         return view;
@@ -85,15 +88,15 @@ public class PlaneFragment extends Fragment{
 
     private void filterPlanesByCategory(String category) {
         if (category == null) {
-            adapter.updatePlanes(planeList); // zmień tutaj na adapter
+            adapter.updatePlanes(planeDtoList); // zmień tutaj na adapter
         } else {
-            List<Plane> filteredPlanes = new ArrayList<>();
-            for (Plane plane : planeList) {
-                if (plane.getCategory().equals(category)) {
-                    filteredPlanes.add(plane);
+            List<PlaneDto> filteredPlaneDtos = new ArrayList<>();
+            for (PlaneDto planeDto : planeDtoList) {
+                if (planeDto.getCategory().equals(category)) {
+                    filteredPlaneDtos.add(planeDto);
                 }
             }
-            adapter.updatePlanes(filteredPlanes); // zmień tutaj na adapter
+            adapter.updatePlanes(filteredPlaneDtos); // zmień tutaj na adapter
         }
     }
 }

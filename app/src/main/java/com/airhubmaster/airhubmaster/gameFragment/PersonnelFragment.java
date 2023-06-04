@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airhubmaster.airhubmaster.R;
 import com.airhubmaster.airhubmaster.adapter.CategoryAdapter;
 import com.airhubmaster.airhubmaster.adapter.PersonnelAdapter;
-import com.airhubmaster.airhubmaster.dto.game.Personnel;
+import com.airhubmaster.airhubmaster.dto.game.PersonnelDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +20,13 @@ import java.util.List;
 public class PersonnelFragment extends Fragment {
     private RecyclerView recyclerView;
     private PersonnelAdapter adapter;
-    private List<Personnel> personnelList;
+    private List<PersonnelDto> personnelDtoList;
     private RecyclerView recyclerViewHorizontal;
     private CategoryAdapter categoryAdapter;
     private List<String> categories;
 
-    public PersonnelFragment() { }
+    public PersonnelFragment() {
+    }
 
     public static PersonnelFragment newInstance() {
         PersonnelFragment fragment = new PersonnelFragment();
@@ -61,14 +62,14 @@ public class PersonnelFragment extends Fragment {
         recyclerViewHorizontal.setLayoutManager(layoutManager);
         recyclerViewHorizontal.setAdapter(categoryAdapter);
 
-        personnelList = new ArrayList<>();
+        personnelDtoList = new ArrayList<>();
         // Add personnel to the list
-        personnelList.add(new Personnel("Grzegorz Floryda", "Pilot", 69, 10, 20, 30));
-        personnelList.add(new Personnel("Jane Smith", "Stweardessa", 80, 50, 70, 90));
-        personnelList.add(new Personnel("Derek Chauvin", "Personel Naziemny", 40, 30, 40, 50));
-        personnelList.add(new Personnel("Bob Brown", "Personel Naziemny", 60, 80, 10, 20));
+        personnelDtoList.add(new PersonnelDto("Grzegorz Floryda", "Pilot", 69, 10, 20, 30));
+        personnelDtoList.add(new PersonnelDto("Jane Smith", "Stweardessa", 80, 50, 70, 90));
+        personnelDtoList.add(new PersonnelDto("Derek Chauvin", "Personel Naziemny", 40, 30, 40, 50));
+        personnelDtoList.add(new PersonnelDto("Bob Brown", "Personel Naziemny", 60, 80, 10, 20));
 
-        adapter = new PersonnelAdapter(personnelList);
+        adapter = new PersonnelAdapter(personnelDtoList);
         recyclerView.setAdapter(adapter);
 
         return view;
@@ -76,15 +77,15 @@ public class PersonnelFragment extends Fragment {
 
     private void filterPersonnelByCategory(String category) {
         if (category == null) {
-            adapter.updatePersonnel(personnelList);
+            adapter.updatePersonnel(personnelDtoList);
         } else {
-            List<Personnel> filteredPersonnel = new ArrayList<>();
-            for (Personnel personnel : personnelList) {
-                if (personnel.getCategory().equals(category)) {
-                    filteredPersonnel.add(personnel);
+            List<PersonnelDto> filteredPersonnelDto = new ArrayList<>();
+            for (PersonnelDto personnelDto : personnelDtoList) {
+                if (personnelDto.getCategory().equals(category)) {
+                    filteredPersonnelDto.add(personnelDto);
                 }
             }
-            adapter.updatePersonnel(filteredPersonnel);
+            adapter.updatePersonnel(filteredPersonnelDto);
         }
     }
 }
