@@ -4,15 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".menuFragment.ProfileFragment" >
+    android:background="@color/white"
+    tools:context=".menuFragment.ProfileFragment">
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="profil"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ProgressBar
+        android:id="@+id/levelProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="255dp"
+        android:layout_height="255dp"
+        android:layout_marginTop="32dp"
+        android:max="50"
+        android:progress="47"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        app:layout_constraintBottom_toTopOf="@+id/nameEditText"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/levelLabelTextView"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="72dp"
+        android:text="Poziom"
+        android:textAlignment="center"
+        android:textColor="#FFC107"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/levelProgressBar"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/levelProgressBar"
+        app:layout_constraintTop_toTopOf="@+id/levelProgressBar" />
+
+    <TextView
+        android:id="@+id/levelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="25"
+        android:textAlignment="center"
+        android:textColor="#FFC107"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/levelProgressBar"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/levelProgressBar"
+        app:layout_constraintTop_toBottomOf="@+id/levelLabelTextView" />
+
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/edittext_rounded_background"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="Jan Kowalski"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textColorHint="#FFC107"
+        android:textSize="28sp"
+        android:textStyle="normal|bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/levelProgressBar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

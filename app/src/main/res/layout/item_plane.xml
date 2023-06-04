@@ -42,6 +42,17 @@
             app:layout_constraintStart_toEndOf="@+id/plane_icon"
             app:layout_constraintTop_toBottomOf="@+id/plane_name" />
 
+        <TextView
+            android:id="@+id/plane_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kategoria"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/expand_button"
+            app:layout_constraintStart_toEndOf="@+id/plane_name"
+            app:layout_constraintTop_toTopOf="@+id/plane_name" />
+
         <ImageButton
             android:id="@+id/expand_button"
             android:layout_width="48dp"
@@ -115,6 +126,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
             <Button
                 android:id="@+id/upgrade_button"

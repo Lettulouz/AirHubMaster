@@ -3,9 +3,11 @@ package com.airhubmaster.airhubmaster.dto.game;
 public class Plane {
 
     private String name;
+    private String category;
     private int upgradeLevel;
 
-    public Plane(String name, int upgradeLevel) {
+    public Plane(String name, String category, int upgradeLevel) {
+        this.category = category;
         this.name = name;
         this.upgradeLevel = upgradeLevel;
     }
@@ -16,10 +18,17 @@ public class Plane {
         }
     }
 
-    public String getName;
-
+    // Poprawione deklaracje poniżej
     public String getName() {
         return name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public void setName(String name) {
