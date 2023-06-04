@@ -27,6 +27,7 @@ import com.airhubmaster.airhubmaster.gameFragment.MainFragment;
 import com.airhubmaster.airhubmaster.gameFragment.PersonnelFragment;
 import com.airhubmaster.airhubmaster.gameFragment.PlaneFragment;
 import com.airhubmaster.airhubmaster.localDataBase.UserLocalStore;
+import com.airhubmaster.airhubmaster.menuFragment.ProfileFragment;
 import com.airhubmaster.airhubmaster.utils.Constans;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -76,8 +77,9 @@ public class MenuActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         navigationView.setNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.profileSideIcon) {
-                Toast.makeText(this, "profil", Toast.LENGTH_SHORT).show();
-            } else if (item.getItemId() == R.id.contactSideIcon) {
+                checkMenu();
+                replaceFragment(new ProfileFragment());
+            } else if (item.getItemId() == R.id.helpSideIcon) {
                 Toast.makeText(this, "kontakt", Toast.LENGTH_SHORT).show();
             } else if (item.getItemId() == R.id.logoutSideIcon) {
                 Toast.makeText(this, "logout", Toast.LENGTH_SHORT).show();

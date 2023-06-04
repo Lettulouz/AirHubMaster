@@ -7,13 +7,13 @@
             android:icon="@drawable/baseline_supervisor_account_24"
             android:title="Profil" />
         <item
+            android:id="@+id/helpSideIcon"
+            android:icon="@drawable/baseline_help_24"
+            android:title="Pomoc" />
+        <item
             android:id="@+id/termsSideIcon"
             android:icon="@drawable/baseline_rule_24"
             android:title="Regulamin" />
-        <item
-            android:id="@+id/contactSideIcon"
-            android:icon="@drawable/baseline_contact_phone_24"
-            android:title="Kontakt" />
     </group>
 
     <item android:title="Dane osobowe">
