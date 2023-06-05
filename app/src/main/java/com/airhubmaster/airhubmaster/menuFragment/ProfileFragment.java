@@ -1,17 +1,22 @@
 package com.airhubmaster.airhubmaster.menuFragment;
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.airhubmaster.airhubmaster.R;
 
 public class ProfileFragment extends Fragment {
 
+    ProgressBar progressBar;
     public ProfileFragment() {
     }
 
@@ -20,6 +25,15 @@ public class ProfileFragment extends Fragment {
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        progressBar = getActivity().findViewById(R.id.levelProgressBar);
+        ObjectAnimator.ofInt(progressBar, "progress", 0, 47)
+                .setDuration(1000)
+                .start();
     }
 
     @Override

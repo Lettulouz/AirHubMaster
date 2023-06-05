@@ -193,6 +193,7 @@
                 android:focusable="true"
                 android:linksClickable="true"
                 android:text="@string/forgetLink"
+                android:layout_marginBottom="32dp"
                 android:textAlignment="center"
                 android:textColorLink="#d9ad00"
                 android:textSize="18sp" />
