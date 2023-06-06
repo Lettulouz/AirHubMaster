@@ -16,7 +16,7 @@ import com.airhubmaster.airhubmaster.R;
 public class PlaneViewHolder extends RecyclerView.ViewHolder {
 
     /**
-     * Variable declaration
+     * Declaring items from the view
      */
     public TextView planeName, upgradeLevel, planeCategory;
     public ImageButton expandButton;

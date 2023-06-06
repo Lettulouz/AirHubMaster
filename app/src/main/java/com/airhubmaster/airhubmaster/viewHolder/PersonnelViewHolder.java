@@ -17,7 +17,7 @@ import com.airhubmaster.airhubmaster.R;
 public class PersonnelViewHolder extends RecyclerView.ViewHolder {
 
     /**
-     * Variable declaration
+     * Declaring items from the view
      */
     ImageView personIcon;
     public TextView personCategory;
