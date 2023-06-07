@@ -1,6 +1,7 @@
 package com.airhubmaster.airhubmaster.menuFragment;
 
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,12 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.airhubmaster.airhubmaster.R;
 
 public class ProfileFragment extends Fragment {
 
+    TextView textLevelExp;
     ProgressBar progressBar;
+
     public ProfileFragment() {
     }
 
@@ -31,9 +35,18 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         progressBar = getActivity().findViewById(R.id.levelProgressBar);
+        textLevelExp = getActivity().findViewById(R.id.textViewLevelStatus);
+
         ObjectAnimator.ofInt(progressBar, "progress", 0, 47)
                 .setDuration(1000)
                 .start();
+
+        ValueAnimator animator = ValueAnimator.ofInt(0, 4200);
+        animator.addUpdateListener(valueAnimator -> {
+            animator.setDuration(1000);
+            textLevelExp.setText(valueAnimator.getAnimatedValue().toString() + " / 6900 exp");
+        });
+        animator.start();
     }
 
     @Override

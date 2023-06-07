@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,6 +29,7 @@ import com.airhubmaster.airhubmaster.gameFragment.PersonnelFragment;
 import com.airhubmaster.airhubmaster.gameFragment.PlaneFragment;
 import com.airhubmaster.airhubmaster.localDataBase.UserLocalStore;
 import com.airhubmaster.airhubmaster.menuFragment.ProfileFragment;
+import com.airhubmaster.airhubmaster.menuFragment.UserDataFragment;
 import com.airhubmaster.airhubmaster.utils.Constans;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -51,6 +53,7 @@ public class MenuActivity extends AppCompatActivity {
     /**
      * Declaring items from the view
      */
+    Button buttonMarket;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ActionBarDrawerToggle drawerToggle;
@@ -81,6 +84,9 @@ public class MenuActivity extends AppCompatActivity {
                 replaceFragment(new ProfileFragment());
             } else if (item.getItemId() == R.id.helpSideIcon) {
                 Toast.makeText(this, "kontakt", Toast.LENGTH_SHORT).show();
+            } else if (item.getItemId() == R.id.changeUserDataIcon) {
+                checkMenu();
+                replaceFragment(new UserDataFragment());
             } else if (item.getItemId() == R.id.logoutSideIcon) {
                 Toast.makeText(this, "logout", Toast.LENGTH_SHORT).show();
                 logoutUser();
@@ -132,13 +138,17 @@ public class MenuActivity extends AppCompatActivity {
         inflater.inflate(R.menu.currency_top_menu, menu);
         MenuItem itemButton = menu.findItem(R.id.buttonCurrencyBar);
         View view = itemButton.getActionView();
-        Button button = view.findViewById(R.id.currencyButton);
+        buttonMarket = view.findViewById(R.id.currencyButton);
         ValueAnimator animator = ValueAnimator.ofInt(0, 69420);
         animator.addUpdateListener(valueAnimator -> {
             animator.setDuration(1500);
-            button.setText(valueAnimator.getAnimatedValue().toString());
+            buttonMarket.setText(valueAnimator.getAnimatedValue().toString());
         });
         animator.start();
+        buttonMarket.setOnClickListener(v -> {
+            Intent intent = new Intent(MenuActivity.this, ShopActivity.class);
+            startActivity(intent);
+        });
         return super.onCreateOptionsMenu(menu);
     }
 
