@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".menuFragment.ProfileFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/levelProgressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="32dp"
+                android:max="50"
+                android:progress="47"
+                android:progressDrawable="@drawable/circular_progress_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/levelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="69"
+                android:textAlignment="center"
+                android:textColor="#FFC107"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/levelLabelTextView"
+                app:layout_constraintStart_toStartOf="@+id/levelLabelTextView"
+                app:layout_constraintTop_toBottomOf="@+id/levelLabelTextView" />
+
+            <TextView
+                android:id="@+id/levelLabelTextView"
+                android:layout_width="130dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="72dp"
+                android:text="Poziom"
+                android:textAlignment="center"
+                android:textColor="#FFC107"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/levelProgressBar"
+                app:layout_constraintStart_toStartOf="@+id/levelProgressBar"
+                app:layout_constraintTop_toTopOf="@+id/levelProgressBar" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:layout_marginTop="24dp"
+                android:background="#FADA5A"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewLevelStatus" />
+
+            <TextView
+                android:id="@+id/nameEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/edittext_rounded_background"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="Jan Kowalski"
+                android:padding="8dp"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textColorHint="#FFC107"
+                android:textSize="26sp"
+                android:textStyle="normal|bold"
+                app:layout_constraintEnd_toEndOf="@+id/levelProgressBar"
+                app:layout_constraintStart_toStartOf="@+id/levelProgressBar"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <TextView
+                android:id="@+id/loginEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/edittext_rounded_background"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="testowlogin123"
+                android:padding="8dp"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textColorHint="#FFC107"
+                android:textSize="26sp"
+                android:textStyle="normal|bold"
+                app:layout_constraintEnd_toEndOf="@+id/levelProgressBar"
+                app:layout_constraintStart_toStartOf="@+id/levelProgressBar"
+                app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+
+            <TextView
+                android:id="@+id/emailEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/edittext_rounded_background"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="testowymail@posl.pl"
+                android:padding="8dp"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textColorHint="#FFC107"
+                android:textSize="26sp"
+                android:textStyle="normal|bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/levelProgressBar"
+                app:layout_constraintStart_toStartOf="@+id/levelProgressBar"
+                app:layout_constraintTop_toBottomOf="@+id/loginEditText" />
+
+            <TextView
+                android:id="@+id/textViewLevelStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="4200 / 6900 exp"
+                android:textColor="#FFC107"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/levelProgressBar" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

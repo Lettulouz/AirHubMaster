@@ -3,10 +3,12 @@
     <string name="loginLink"><a href="">Jeśli posiadasz konto, zaloguj się.</a></string>
     <string name="registerLink"><a href="">Jeśli nie posiadasz konta, zarejestruj się</a></string>
     <string name="activateLink"><a href="">aktywuj zarejestrowane konto.</a></string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="forgetLink"><a href="">Nie pamiętasz hasła?</a></string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="upgrade_level">Poziom ulepszenia: %1$d</string>
     <string name="collapse">Zwiń</string>
     <string name="expand">Rozwiń</string>
     <string name="expand_button_description">Rozwiń szczegóły samolotu</string>
+    <string name="openMenu">Otwórz menu</string>
+    <string name="closeMenu">Zamknij menu</string>
 </resources>

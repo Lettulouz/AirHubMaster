@@ -12,4 +12,9 @@
     <color name="level_active_stroke_color">#388E3C</color>
     <color name="level_inactive_color">#CCCCCC</color>
     <color name="level_inactive_stroke_color">#999999</color>
+    <color name="yellow">#E1E728</color>
+    <color name="colorD">#FF8888</color>
+    <color name="colorU">#88FF88</color>
+    <color name="colorW">#8888FF</color>
+    <color name="colorB">#FFFF88</color>
 </resources>

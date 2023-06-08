@@ -2,6 +2,7 @@ package com.airhubmaster.airhubmaster;
 
 import static com.airhubmaster.airhubmaster.utils.Constans.MESSAGE_ERROR_ACTIVATE;
 import static com.airhubmaster.airhubmaster.utils.Constans.MESSAGE_ERROR_STANDARD;
+import static com.airhubmaster.airhubmaster.utils.Constans.URL_SERVER;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -48,6 +49,7 @@ public class ActivateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activate);
+        getSupportActionBar().hide();
         buttonActivate = findViewById(R.id.buttonActivate);
         inputToken = findViewById(R.id.inputActivate);
         inputTokenLayout = findViewById(R.id.textActivateLayout);
@@ -65,7 +67,7 @@ public class ActivateActivity extends AppCompatActivity {
             activateAccountRequestDto = new ActivateAccountRequestDto(token);
 
             OkHttpClient client = new OkHttpClient();
-            String url = "http://airhubmaster.miloszgilga.pl/api/v1/auth/activate";
+            String url = URL_SERVER + "api/v1/auth/activate";
             RequestBody body = RequestBody.create(gson.toJson(activateAccountRequestDto), Constans.JSON);
             Request request = new Request.Builder()
                     .url(url)

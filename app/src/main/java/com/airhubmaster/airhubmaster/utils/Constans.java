@@ -10,6 +10,7 @@ public class Constans {
     /**
      * Variable declaration
      */
+    public static final String URL_SERVER = "https://api.airhubmaster.com/";
     public static final String MESSAGE_AUTHENTICATION = "Podaj poprawne dane.";
     public static final String MESSAGE_CORRECT_LOGIN_IN = "Poprawnie zalogowano.";
     public static final String MESSAGE_ERROR_STANDARD = "Wystąpił błąd podczas łączenia.";
