@@ -45,6 +45,14 @@ public class UserLocalStore {
 
     //==============================================================================================
 
+    public void setJwtUserToken(String JwtUserToken) {
+        SharedPreferences.Editor userLocalDatabaseEditor = userLocalDatabase.edit();
+        userLocalDatabaseEditor.putString("jwtToken", JwtUserToken);
+        userLocalDatabaseEditor.commit();
+    }
+
+    //==============================================================================================
+
     public void storeUserData(LoginResponseDto loginResponseDto) {
         SharedPreferences.Editor userLocalDatabaseEditor = userLocalDatabase.edit();
         userLocalDatabaseEditor.putString("jwtToken", loginResponseDto.getJwtToken());
