@@ -1,5 +1,7 @@
 package com.airhubmaster.airhubmaster;
 
+import static com.airhubmaster.airhubmaster.interceptor.ApiInterceptor.tokenExpiredInterceptor;
+import static com.airhubmaster.airhubmaster.utils.Constans.MESSAGE_ERROR_STANDARD;
 import static com.airhubmaster.airhubmaster.utils.Constans.URL_SERVER;
 
 import androidx.annotation.NonNull;
@@ -23,14 +25,12 @@ import android.widget.Toast;
 
 import com.airhubmaster.airhubmaster.databinding.ActivityMenuBinding;
 import com.airhubmaster.airhubmaster.dto.api.LogoutResponseDto;
-import com.airhubmaster.airhubmaster.dto.api.RefreshRequestDto;
 import com.airhubmaster.airhubmaster.gameFragment.MainFragment;
 import com.airhubmaster.airhubmaster.gameFragment.PersonnelFragment;
 import com.airhubmaster.airhubmaster.gameFragment.PlaneFragment;
 import com.airhubmaster.airhubmaster.localDataBase.UserLocalStore;
 import com.airhubmaster.airhubmaster.menuFragment.ProfileFragment;
 import com.airhubmaster.airhubmaster.menuFragment.UserDataFragment;
-import com.airhubmaster.airhubmaster.utils.Constans;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
@@ -39,10 +39,8 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -88,9 +86,7 @@ public class MenuActivity extends AppCompatActivity {
                 checkMenu();
                 replaceFragment(new UserDataFragment());
             } else if (item.getItemId() == R.id.logoutSideIcon) {
-                Toast.makeText(this, "logout", Toast.LENGTH_SHORT).show();
                 logoutUser();
-                userLocalStore.clearUserData();
             }
             return false;
         });
@@ -183,9 +179,6 @@ public class MenuActivity extends AppCompatActivity {
      * The method responsible for logout user from application
      */
     void logoutUser() {
-        OkHttpClient client = new OkHttpClient().newBuilder()
-                .addInterceptor(this::intercept)
-                .build();
         userLocalStore = UserLocalStore.getInstance(MenuActivity.this);
         String url = URL_SERVER + "api/v1/auth/logout";
         Request request = new Request.Builder()
@@ -196,10 +189,16 @@ public class MenuActivity extends AppCompatActivity {
                 .header("Connection", "close")
                 .build();
 
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(tokenExpiredInterceptor(userLocalStore))
+                .build();
+
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
+                runOnUiThread(() -> Toast.makeText(MenuActivity.this,
+                        MESSAGE_ERROR_STANDARD, Toast.LENGTH_SHORT).show());
             }
 
             @Override
@@ -208,32 +207,14 @@ public class MenuActivity extends AppCompatActivity {
                     logoutResponseDto = gson.fromJson(response.body().string(), LogoutResponseDto.class);
                     runOnUiThread(() -> Toast.makeText(MenuActivity.this,
                             logoutResponseDto.getMessage(), Toast.LENGTH_SHORT).show());
+                    userLocalStore.clearUserData();
                     finish();
                     System.exit(0);
+                } else {
+                    runOnUiThread(() -> Toast.makeText(MenuActivity.this,
+                            MESSAGE_ERROR_STANDARD, Toast.LENGTH_SHORT).show());
                 }
-
             }
         });
-    }
-
-    //==============================================================================================
-
-    public Response intercept(@NonNull Interceptor.Chain chain) throws IOException {
-        Request request = chain.request();
-        Request newRequest;
-        userLocalStore = UserLocalStore.getInstance(MenuActivity.this);
-        RefreshRequestDto refreshRequestDto = new RefreshRequestDto(userLocalStore.getJwtUserToken(),
-                userLocalStore.getRefreshUserToken());
-        String url = URL_SERVER + "api/v1/auth/refresh";
-        RequestBody body = RequestBody.create(gson.toJson(refreshRequestDto), Constans.JSON);
-
-        newRequest = request.newBuilder()
-                .url(url)
-                .post(body)
-                .header("Connection", "close")
-                .header("Accept-language", "pl")
-                .header("User-Agent", "mobile")
-                .build();
-        return chain.proceed(newRequest);
     }
 }
