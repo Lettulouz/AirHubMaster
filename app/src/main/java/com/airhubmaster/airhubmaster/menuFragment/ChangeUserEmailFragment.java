@@ -1,5 +1,6 @@
 package com.airhubmaster.airhubmaster.menuFragment;
 
+import static com.airhubmaster.airhubmaster.interceptor.ApiInterceptor.tokenExpiredInterceptor;
 import static com.airhubmaster.airhubmaster.utils.Constans.MESSAGE_ERROR_STANDARD;
 import static com.airhubmaster.airhubmaster.utils.Constans.URL_SERVER;
 
@@ -88,7 +89,6 @@ public class ChangeUserEmailFragment extends Fragment {
         changeUserEmailRequestDto = new ChangeUserEmailRequestDto(email);
         userLocalStore = UserLocalStore.getInstance(getActivity());
 
-        OkHttpClient client = new OkHttpClient();
         String url = URL_SERVER + "api/v1/account/update/email";
         RequestBody body = RequestBody.create(gson.toJson(changeUserEmailRequestDto), Constans.JSON);
         Request request = new Request.Builder()
@@ -98,6 +98,10 @@ public class ChangeUserEmailFragment extends Fragment {
                 .header("Connection", "close")
                 .header("Accept-language", "pl")
                 .header("User-Agent", "mobile")
+                .build();
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(tokenExpiredInterceptor(userLocalStore))
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -121,22 +125,25 @@ public class ChangeUserEmailFragment extends Fragment {
                         inputManager.hideSoftInputFromWindow(currentFocusedView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     }
                     replaceFragment(new ProfileFragment());
-                } else if (response.code() == 401) {
-                    standardMessageErrorDto = gson.fromJson(response.body().string(), StandardMessageErrorDto.class);
-                    getActivity().runOnUiThread(() -> {
-                        inputEmailLayout.setErrorEnabled(true);
-                        inputEmailLayout.setError(standardMessageErrorDto.getMessage());
-                    });
                 } else if (response.code() == 400) {
-                    fieldMessageErrorDto = gson.fromJson(response.body().string(), FieldMessageErrorDto.class);
-                    for (Map.Entry<String, String> entry : fieldMessageErrorDto.getErrors().entrySet()) {
-                        String key = entry.getKey();
-                        String value = entry.getValue();
-                        if (key.equals("newEmail")) {
-                            getActivity().runOnUiThread(() -> {
-                                inputEmailLayout.setErrorEnabled(true);
-                                inputEmailLayout.setError(value);
-                            });
+                    String responseBody = response.body().string();
+                    fieldMessageErrorDto = gson.fromJson(responseBody, FieldMessageErrorDto.class);
+                    if (fieldMessageErrorDto.getErrors() == null) {
+                        standardMessageErrorDto = gson.fromJson(responseBody, StandardMessageErrorDto.class);
+                        getActivity().runOnUiThread(() -> {
+                            inputEmailLayout.setErrorEnabled(true);
+                            inputEmailLayout.setError(standardMessageErrorDto.getMessage());
+                        });
+                    } else {
+                        for (Map.Entry<String, String> entry : fieldMessageErrorDto.getErrors().entrySet()) {
+                            String key = entry.getKey();
+                            String value = entry.getValue();
+                            if (key.equals("newEmail")) {
+                                getActivity().runOnUiThread(() -> {
+                                    inputEmailLayout.setErrorEnabled(true);
+                                    inputEmailLayout.setError(value);
+                                });
+                            }
                         }
                     }
                 } else {
