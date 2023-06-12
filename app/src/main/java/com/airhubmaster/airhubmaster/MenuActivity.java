@@ -28,6 +28,7 @@ import com.airhubmaster.airhubmaster.dto.api.LogoutResponseDto;
 import com.airhubmaster.airhubmaster.gameFragment.MainFragment;
 import com.airhubmaster.airhubmaster.gameFragment.PersonnelFragment;
 import com.airhubmaster.airhubmaster.gameFragment.PlaneFragment;
+import com.airhubmaster.airhubmaster.gameFragment.ServiceFragment;
 import com.airhubmaster.airhubmaster.localDataBase.UserLocalStore;
 import com.airhubmaster.airhubmaster.menuFragment.ProfileFragment;
 import com.airhubmaster.airhubmaster.menuFragment.UserDataFragment;
@@ -67,6 +68,7 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMenuBinding.inflate(getLayoutInflater());
+        replaceFragment(new MainFragment());
         setContentView(binding.getRoot());
         airportButton = findViewById(R.id.buttonMenuMain);
         drawerLayout = findViewById(R.id.drawerLayout);
@@ -98,6 +100,10 @@ public class MenuActivity extends AppCompatActivity {
             } else if (item.getItemId() == R.id.planeIcon) {
                 checkMenu();
                 replaceFragment(new PlaneFragment());
+            }
+            else if (item.getItemId() == R.id.serviceIcon) {
+                checkMenu();
+                replaceFragment(new ServiceFragment());
             }
             return true;
         });
@@ -170,6 +176,7 @@ public class MenuActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frameLayoutMenu, fragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 

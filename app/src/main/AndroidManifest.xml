@@ -33,6 +33,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".MenuActivity"
+            android:noHistory="true"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
