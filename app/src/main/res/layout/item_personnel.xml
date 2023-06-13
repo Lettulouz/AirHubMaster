@@ -60,8 +60,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.529"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/person_name"
-            tools:visibility="gone">
+            app:layout_constraintTop_toBottomOf="@+id/person_name">
 
             <TextView
                 android:id="@+id/field_D"
@@ -70,16 +69,16 @@
                 android:layout_marginTop="4dp"
                 android:background="@drawable/rounded_field_d"
                 android:gravity="center"
-                android:tooltipText="Doświadczenie"
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textSize="18sp"
+                android:tooltipText="Doświadczenie"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.153"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="D  69"
-                tools:ignore="NotSibling" />
+                tools:ignore="NotSibling"
+                tools:text="D  69" />
 
             <TextView
                 android:id="@+id/field_U"
@@ -88,10 +87,10 @@
                 android:layout_marginStart="1dp"
                 android:background="@drawable/rounded_field_u"
                 android:gravity="center"
-                android:tooltipText="Umiejętności"
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textSize="18sp"
+                android:tooltipText="Umiejętności"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/field_D"
                 app:layout_constraintStart_toStartOf="@+id/field_D"
@@ -104,10 +103,10 @@
                 android:layout_height="45dp"
                 android:background="@drawable/rounded_field_w"
                 android:gravity="center"
-                android:tooltipText="Współpraca"
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textSize="18sp"
+                android:tooltipText="Współpraca"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.034"
                 app:layout_constraintStart_toEndOf="@+id/field_D"
@@ -120,10 +119,10 @@
                 android:layout_height="45dp"
                 android:background="@drawable/rounded_field_b"
                 android:gravity="center"
-                android:tooltipText="Buntowniczość"
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textSize="18sp"
+                android:tooltipText="Buntowniczość"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/field_W"
                 app:layout_constraintStart_toStartOf="@+id/field_W"
