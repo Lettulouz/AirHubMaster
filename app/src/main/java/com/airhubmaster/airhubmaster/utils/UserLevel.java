@@ -7,8 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 public class UserLevel {
+    private int maxLevel = 50;
     Map<Integer, List<Integer>> staffBoostMap = new HashMap<>();
     Map<Integer, Integer> requiredExpMap = new HashMap<>();
+    Map<Integer, Double> expBoostMap = new HashMap<>();
+
     public UserLevel(){
         staffBoostMap.put(1, Arrays.asList(100, 0, 0, 0, 0, 0));
         staffBoostMap.put(2, Arrays.asList(99, 1, 0, 0, 0, 0));
@@ -124,5 +127,86 @@ public class UserLevel {
         requiredExpMap.put(48, 170 *m);
         requiredExpMap.put(49, 200 * m);
         requiredExpMap.put(50, 250 * m);
+
+        // exp boost
+
+
+        expBoostMap.put(1, 1.0);
+        expBoostMap.put(2, 1.1);
+        expBoostMap.put(3, 1.2);
+        expBoostMap.put(4, 1.3);
+        expBoostMap.put(5, 1.5);
+        expBoostMap.put(6, 1.6);
+        expBoostMap.put(7, 1.7);
+        expBoostMap.put(8, 1.8);
+        expBoostMap.put(9, 1.9);
+        expBoostMap.put(10, 2.0);
+
+        expBoostMap.put(11, 2.1);
+        expBoostMap.put(12, 2.3);
+        expBoostMap.put(13, 2.5);
+        expBoostMap.put(14, 2.6);
+        expBoostMap.put(15, 2.8);
+        expBoostMap.put(16, 2.9);
+        expBoostMap.put(17, 3.1);
+        expBoostMap.put(18, 3.2);
+        expBoostMap.put(19, 3.3);
+        expBoostMap.put(20, 3.5);
+
+        expBoostMap.put(21, 3.7);
+        expBoostMap.put(22, 4.0);
+        expBoostMap.put(23, 4.2);
+        expBoostMap.put(24, 4.5);
+        expBoostMap.put(25, 4.7);
+        expBoostMap.put(26, 4.9);
+        expBoostMap.put(27, 5.1);
+        expBoostMap.put(28, 5.2);
+        expBoostMap.put(29, 5.3);
+        expBoostMap.put(30, 5.5);
+
+        expBoostMap.put(31, 5.6);
+        expBoostMap.put(32, 5.8);
+        expBoostMap.put(33, 6.0);
+        expBoostMap.put(34, 6.2);
+        expBoostMap.put(35, 6.5);
+        expBoostMap.put(36, 6.7);
+        expBoostMap.put(37, 6.9);
+        expBoostMap.put(38, 7.1);
+        expBoostMap.put(39, 7.3);
+        expBoostMap.put(40, 7.5);
+
+        expBoostMap.put(41, 7.8);
+        expBoostMap.put(42, 8.2);
+        expBoostMap.put(43, 8.5);
+        expBoostMap.put(44, 8.7);
+        expBoostMap.put(45, 9.0);
+        expBoostMap.put(46, 9.2);
+        expBoostMap.put(47, 9.4);
+        expBoostMap.put(48, 9.6);
+        expBoostMap.put(49, 9.8);
+        expBoostMap.put(50, 12.0);
+    }
+
+    public Map<Integer, List<Integer>> getStaffBoostMap() {
+        return staffBoostMap;
+    }
+
+    public Map<Integer, Double> getExpBoostMap() {
+        return expBoostMap;
+    }
+
+    public int getExpAtLevel(int level){
+        return requiredExpMap.get(level);
+    }
+
+    public double getExpBoostAtLevel(int level){
+        return expBoostMap.get(level);
+    }
+    public Map<Integer, Integer> getRequiredExpMap() {
+        return requiredExpMap;
+    }
+
+    public int getMaxLevel() {
+        return maxLevel;
     }
 }
