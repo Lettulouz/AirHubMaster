@@ -45,7 +45,10 @@ public class UserDataFragment extends Fragment {
         emailCardView = getView().findViewById(R.id.emailChangeCard);
         passwordCardView = getView().findViewById(R.id.passwordChangeCard);
 
+        usernameCardView.setOnClickListener(v -> replaceFragment(new ChangeUserUsernameFragment()));
         loginCardView.setOnClickListener(v -> replaceFragment(new ChangeUserLoginFragment()));
+        emailCardView.setOnClickListener(v -> replaceFragment(new ChangeUserEmailFragment()));
+        passwordCardView.setOnClickListener(v -> replaceFragment(new ChangeUserPasswordFragment()));
 
     }
 
@@ -59,6 +62,7 @@ public class UserDataFragment extends Fragment {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frameLayoutMenu, fragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 }

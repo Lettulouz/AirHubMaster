@@ -4,97 +4,98 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivateActivity">
+    tools:context=".menuFragment.ChangeUserEmailFragment">
 
     <View
         android:id="@+id/viewTopColor"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#FADA5A"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
+        android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.2" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minLines="2"
-        android:text="Aktywuj zarejestrowane \n już konto."
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/viewTopColor"
-        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_person_24"
+        app:srcCompat="@drawable/baseline_email_24"
         app:tint="@color/white" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
+        android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.2" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:autoSizeMaxTextSize="24dp"
+        android:autoSizeMinTextSize="22dp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
+        android:text="Zmień email przypisany \n do twojego konta"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textActivateLayout"
+        android:id="@+id/textChangeUserEmailLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="20dp"
-        android:hint="Wpisz kod aktywujący"
+        android:hint="Podaj nowy email"
         app:counterEnabled="true"
-        app:counterMaxLength="10"
+        app:counterMaxLength="100"
         app:errorEnabled="true"
         app:errorTextColor="@color/red"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/viewTopColor"
-        app:startIconDrawable="@drawable/baseline_person_24">
+        app:startIconDrawable="@drawable/baseline_email_24">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputActivate"
+            android:id="@+id/inputChangeUserEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:maxLength="10"
+            android:inputType="textEmailAddress"
+            android:maxLength="100"
             android:maxLines="1"
             android:textColor="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/buttonActivate"
+        android:id="@+id/buttonChangeUserEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="AKTYWUJ"
+        android:text="ZMIEŃ"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textActivateLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/textChangeUserEmailLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,8 +21,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.airhubmaster.airhubmaster.R;
-import com.airhubmaster.airhubmaster.dto.api.ChangeUserLoginRequestDto;
-import com.airhubmaster.airhubmaster.dto.api.ChangeUserLoginResponseDto;
+import com.airhubmaster.airhubmaster.dto.api.ChangeUserEmailRequestDto;
+import com.airhubmaster.airhubmaster.dto.api.ChangeUserEmailResponseDto;
 import com.airhubmaster.airhubmaster.dto.api.FieldMessageErrorDto;
 import com.airhubmaster.airhubmaster.dto.api.StandardMessageErrorDto;
 import com.airhubmaster.airhubmaster.localDataBase.UserLocalStore;
@@ -41,23 +41,23 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class ChangeUserLoginFragment extends Fragment {
+public class ChangeUserEmailFragment extends Fragment {
 
     Button buttonSendChange;
-    TextInputEditText inputLogin;
-    TextInputLayout inputLoginLayout;
+    TextInputEditText inputEmail;
+    TextInputLayout inputEmailLayout;
     UserLocalStore userLocalStore;
     StandardMessageErrorDto standardMessageErrorDto;
     FieldMessageErrorDto fieldMessageErrorDto;
-    ChangeUserLoginRequestDto changeUserLoginRequestDto;
-    ChangeUserLoginResponseDto changeUserLoginResponseDto;
+    ChangeUserEmailRequestDto changeUserEmailRequestDto;
+    ChangeUserEmailResponseDto changeUserEmailResponseDto;
     private final Gson gson = new Gson();
 
-    public ChangeUserLoginFragment() {
+    public ChangeUserEmailFragment() {
     }
 
-    public static ChangeUserLoginFragment newInstance(String param1, String param2) {
-        ChangeUserLoginFragment fragment = new ChangeUserLoginFragment();
+    public static ChangeUserEmailFragment newInstance(String param1, String param2) {
+        ChangeUserEmailFragment fragment = new ChangeUserEmailFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -71,26 +71,26 @@ public class ChangeUserLoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        buttonSendChange = getActivity().findViewById(R.id.buttonChangeUserLogin);
-        inputLogin = getActivity().findViewById(R.id.inputChangeUserLogin);
-        inputLoginLayout = getActivity().findViewById(R.id.textChangeUserLoginLayout);
+        buttonSendChange = getActivity().findViewById(R.id.buttonChangeUserEmail);
+        inputEmail = getActivity().findViewById(R.id.inputChangeUserEmail);
+        inputEmailLayout = getActivity().findViewById(R.id.textChangeUserEmailLayout);
 
-        buttonSendChange.setOnClickListener(v -> changeLogin());
+        buttonSendChange.setOnClickListener(v -> changeEmail());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_change_user_login, container, false);
+        return inflater.inflate(R.layout.fragment_change_user_email, container, false);
     }
 
-    private void changeLogin() {
-        String login = inputLogin.getText().toString();
-        changeUserLoginRequestDto = new ChangeUserLoginRequestDto(login);
+    private void changeEmail() {
+        String email = inputEmail.getText().toString();
+        changeUserEmailRequestDto = new ChangeUserEmailRequestDto(email);
         userLocalStore = UserLocalStore.getInstance(getActivity());
 
-        String url = URL_SERVER + "api/v1/account/update/login ";
-        RequestBody body = RequestBody.create(gson.toJson(changeUserLoginRequestDto), Constans.JSON);
+        String url = URL_SERVER + "api/v1/account/update/email";
+        RequestBody body = RequestBody.create(gson.toJson(changeUserEmailRequestDto), Constans.JSON);
         Request request = new Request.Builder()
                 .url(url)
                 .patch(body)
@@ -115,10 +115,9 @@ public class ChangeUserLoginFragment extends Fragment {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.code() == 200) {
-                    changeUserLoginResponseDto = gson.fromJson(response.body().string(), ChangeUserLoginResponseDto.class);
-                    userLocalStore.setJwtUserToken(changeUserLoginResponseDto.getUpdatedJwt());
+                    changeUserEmailResponseDto = gson.fromJson(response.body().string(), ChangeUserEmailResponseDto.class);
                     getActivity().runOnUiThread(() -> Toast.makeText(getActivity(),
-                            changeUserLoginResponseDto.getMessage(), Toast.LENGTH_LONG).show());
+                            changeUserEmailResponseDto.getMessage(), Toast.LENGTH_LONG).show());
                     InputMethodManager inputManager = (InputMethodManager) getActivity()
                             .getSystemService(Context.INPUT_METHOD_SERVICE);
                     View currentFocusedView = getActivity().getCurrentFocus();
@@ -132,17 +131,17 @@ public class ChangeUserLoginFragment extends Fragment {
                     if (fieldMessageErrorDto.getErrors() == null) {
                         standardMessageErrorDto = gson.fromJson(responseBody, StandardMessageErrorDto.class);
                         getActivity().runOnUiThread(() -> {
-                            inputLoginLayout.setErrorEnabled(true);
-                            inputLoginLayout.setError(standardMessageErrorDto.getMessage());
+                            inputEmailLayout.setErrorEnabled(true);
+                            inputEmailLayout.setError(standardMessageErrorDto.getMessage());
                         });
                     } else {
                         for (Map.Entry<String, String> entry : fieldMessageErrorDto.getErrors().entrySet()) {
                             String key = entry.getKey();
                             String value = entry.getValue();
-                            if (key.equals("newLogin")) {
+                            if (key.equals("newEmail")) {
                                 getActivity().runOnUiThread(() -> {
-                                    inputLoginLayout.setErrorEnabled(true);
-                                    inputLoginLayout.setError(value);
+                                    inputEmailLayout.setErrorEnabled(true);
+                                    inputEmailLayout.setError(value);
                                 });
                             }
                         }

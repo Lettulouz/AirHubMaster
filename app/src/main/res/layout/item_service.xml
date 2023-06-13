@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <ImageButton
+            android:id="@+id/expand_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/expand_icon"
+            android:contentDescription="@string/expand_button_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/plane_icon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/baseline_airplanemode_active_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/plane_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nazwa samolotu"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/plane_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/plane_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kategoria"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/expand_button"
+            app:layout_constraintHorizontal_bias="0.862"
+            app:layout_constraintStart_toEndOf="@+id/plane_icon"
+            app:layout_constraintTop_toTopOf="@+id/plane_name" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/service_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/plane_icon">
+
+            <ImageView
+                android:id="@+id/icon_1"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/baseline_help_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/icon_2"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="62dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/baseline_help_24"
+                app:layout_constraintStart_toEndOf="@+id/icon_1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/icon_3"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="62dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/baseline_help_24"
+                app:layout_constraintStart_toEndOf="@+id/icon_2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/percentage_1"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/yellow_circle"
+                android:gravity="center"
+                android:text="90%"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/icon_1" />
+
+            <TextView
+                android:id="@+id/percentage_2"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="62dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/yellow_circle"
+                android:gravity="center"
+                android:text="80%"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/percentage_1"
+                app:layout_constraintTop_toBottomOf="@+id/icon_2" />
+
+            <TextView
+                android:id="@+id/percentage_3"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="62dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/yellow_circle"
+                android:gravity="center"
+                android:text="70%"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/percentage_2"
+                app:layout_constraintTop_toBottomOf="@+id/icon_3" />
+
+            <Button
+                android:id="@+id/repair_btn_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:backgroundTint="@color/level_active_color"
+                android:text="Napraw"
+                android:textColor="@color/white"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/percentage_1"
+                app:layout_constraintVertical_bias="1.0"
+                tools:ignore="TextSizeCheck" />
+
+            <Button
+                android:id="@+id/repair_btn_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:backgroundTint="@color/level_active_color"
+                android:text="Napraw"
+                android:textColor="@color/white"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/repair_btn_1"
+                app:layout_constraintTop_toBottomOf="@+id/percentage_2"
+                app:layout_constraintVertical_bias="1.0"
+                tools:ignore="TextSizeCheck" />
+
+            <Button
+                android:id="@+id/repair_btn_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:backgroundTint="@color/level_active_color"
+                android:text="Napraw"
+                android:textColor="@color/white"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/repair_btn_2"
+                app:layout_constraintTop_toBottomOf="@+id/percentage_3"
+                app:layout_constraintVertical_bias="1.0"
+                tools:ignore="TextSizeCheck" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
