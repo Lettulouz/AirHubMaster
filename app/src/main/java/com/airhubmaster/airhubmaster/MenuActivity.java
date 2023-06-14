@@ -17,7 +17,6 @@ import androidx.fragment.app.FragmentTransaction;
 import android.animation.ValueAnimator;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.InsetDrawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -38,6 +37,7 @@ import com.airhubmaster.airhubmaster.gameFragment.MainFragment;
 import com.airhubmaster.airhubmaster.gameFragment.PersonnelFragment;
 import com.airhubmaster.airhubmaster.gameFragment.PlaneFragment;
 import com.airhubmaster.airhubmaster.gameFragment.ServiceFragment;
+import com.airhubmaster.airhubmaster.gameFragment.ShopFragment;
 import com.airhubmaster.airhubmaster.localDataBase.UserLocalStore;
 import com.airhubmaster.airhubmaster.menuFragment.ProfileFragment;
 import com.airhubmaster.airhubmaster.menuFragment.UserDataFragment;
@@ -187,8 +187,7 @@ public class MenuActivity extends AppCompatActivity {
         });
         animator.start();
         buttonMarket.setOnClickListener(v -> {
-            Intent intent = new Intent(MenuActivity.this, ShopActivity.class);
-            startActivity(intent);
+            replaceFragment(new ShopFragment());
         });
         return super.onCreateOptionsMenu(menu);
     }
