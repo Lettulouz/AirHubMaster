@@ -88,7 +88,7 @@ public class PlaneFragment extends Fragment {
 
     private void filterPlanesByCategory(String category) {
         if (category == null) {
-            adapter.updatePlanes(planeDtoList); // zmień tutaj na adapter
+            adapter.updatePlanes(planeDtoList);
         } else {
             List<PlaneDto> filteredPlaneDtos = new ArrayList<>();
             for (PlaneDto planeDto : planeDtoList) {
@@ -96,7 +96,7 @@ public class PlaneFragment extends Fragment {
                     filteredPlaneDtos.add(planeDto);
                 }
             }
-            adapter.updatePlanes(filteredPlaneDtos); // zmień tutaj na adapter
+            adapter.updatePlanes(filteredPlaneDtos);
         }
     }
 }
