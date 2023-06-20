@@ -49,8 +49,7 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/expand_button"
-            app:layout_constraintHorizontal_bias="0.862"
-            app:layout_constraintStart_toEndOf="@+id/plane_icon"
+            app:layout_constraintStart_toEndOf="@+id/plane_name"
             app:layout_constraintTop_toTopOf="@+id/plane_name" />
 
         <androidx.constraintlayout.widget.ConstraintLayout

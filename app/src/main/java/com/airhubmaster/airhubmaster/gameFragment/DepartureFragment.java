@@ -1,36 +1,37 @@
 package com.airhubmaster.airhubmaster.gameFragment;
 
+import android.os.Bundle;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.airhubmaster.airhubmaster.R;
 import com.airhubmaster.airhubmaster.adapter.CategoryAdapter;
-import com.airhubmaster.airhubmaster.adapter.PlaneAdapter;
+import com.airhubmaster.airhubmaster.adapter.SendPlaneAdapter;
 import com.airhubmaster.airhubmaster.dto.game.PlaneDto;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+public class DepartureFragment extends Fragment {
 
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.airhubmaster.airhubmaster.R;
-
-public class PlaneFragment extends Fragment {
-    private RecyclerView recyclerView;
-    private PlaneAdapter adapter;
+    private RecyclerView recyclerViewDeparture;
+    private SendPlaneAdapter sendPlaneAdapter;
     private List<PlaneDto> planeDtoList;
-    private RecyclerView recyclerViewHorizontal;
     private CategoryAdapter categoryAdapter;
+    private RecyclerView recyclerViewHorizontal;
     private List<String> categories;
 
-    public PlaneFragment() {
+    public DepartureFragment() {
     }
 
-    public static PlaneFragment newInstance() {
-        PlaneFragment fragment = new PlaneFragment();
+    public static DepartureFragment newInstance(String param1, String param2) {
+        DepartureFragment fragment = new DepartureFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -39,18 +40,15 @@ public class PlaneFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_plane, container, false);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        recyclerViewDeparture = view.findViewById(R.id.recyclerViewDeparture);
 
-
-        recyclerViewHorizontal = view.findViewById(R.id.recyclerViewHorizontal);
-        recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewHorizontal = view.findViewById(R.id.recyclerViewDepartureCategory);
 
         // Initialize the categories
         categories = new ArrayList<>();
@@ -66,7 +64,6 @@ public class PlaneFragment extends Fragment {
         recyclerViewHorizontal.setLayoutManager(layoutManager);
         recyclerViewHorizontal.setAdapter(categoryAdapter);
 
-
         planeDtoList = new ArrayList<>();
         // dodaj samoloty do listy
         planeDtoList.add(new PlaneDto("Samolot A", "Kategoria1", 0));
@@ -80,15 +77,24 @@ public class PlaneFragment extends Fragment {
         planeDtoList.add(new PlaneDto("Samolot C", "Kategoria4", 0));
         planeDtoList.add(new PlaneDto("Samolot B", "Kategoria5", 0));
         planeDtoList.add(new PlaneDto("Samolot C", "Kategoria1", 0));
-        adapter = new PlaneAdapter(planeDtoList);
-        recyclerView.setAdapter(adapter);
+        initRecyclerView();
+    }
 
-        return view;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_departure, container, false);
+    }
+
+    private void initRecyclerView() {
+        recyclerViewDeparture.setLayoutManager(new LinearLayoutManager(getContext()));
+        sendPlaneAdapter = new SendPlaneAdapter(planeDtoList, getContext());
+        recyclerViewDeparture.setAdapter(sendPlaneAdapter);
     }
 
     private void filterPlanesByCategory(String category) {
         if (category == null) {
-            adapter.updatePlanes(planeDtoList);
+            sendPlaneAdapter.updatePlanes(planeDtoList);
         } else {
             List<PlaneDto> filteredPlaneDtos = new ArrayList<>();
             for (PlaneDto planeDto : planeDtoList) {
@@ -96,7 +102,7 @@ public class PlaneFragment extends Fragment {
                     filteredPlaneDtos.add(planeDto);
                 }
             }
-            adapter.updatePlanes(filteredPlaneDtos);
+            sendPlaneAdapter.updatePlanes(filteredPlaneDtos);
         }
     }
 }
