@@ -11,6 +11,8 @@ import java.util.List;
 public abstract class Plane {
     private List<PlaneService> planeService = new ArrayList<>();
 
+    private List<Staff> staffList = new ArrayList<>();
+
     private LocalDateTime availableAt;
 
     public Plane(){
@@ -18,6 +20,12 @@ public abstract class Plane {
         addTiresService();
         addWingsService();
     }
+
+    public void setStaffList(List<Staff> staffList) { this.staffList = staffList; }
+    public void resetStaffList(List<Staff> staffList) { this.staffList = new ArrayList<>(); }
+    public void addStaff (Staff staff) { this.staffList.add(staff); }
+    public void removeStaff (Staff staff) { this.staffList.remove(staff); }
+    public List<Staff> getStaffList () { return staffList; }
 
     public void addTiresService(){
         planeService.add(new Tires());

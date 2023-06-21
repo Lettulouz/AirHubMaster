@@ -3,10 +3,14 @@ package com.airhubmaster.airhubmaster.utils;
 import static com.airhubmaster.airhubmaster.utils.Utils.generateRandomNumberFromRangeDouble;
 import static com.airhubmaster.airhubmaster.utils.Utils.generateRandomNumberFromRangeInt;
 
+import java.util.List;
+
 public class Flight {
     private int prize;
+    private int finalPrize;
     private int flightLength;
     private int exp;
+    private int salaries;
 
     private Plane plane;
     private UserProfile userProfile;
@@ -20,6 +24,7 @@ public class Flight {
         generateFlightLength();
         generatePrize();
         generateExp();
+        generateSalaries();
     }
 
     private void generateFlightLength(){
@@ -32,6 +37,14 @@ public class Flight {
         double expBoost = userProfile.getUserLevel().getExpBoostAtLevel(userProfile.getLevel());
         double additionalPrizeMultiplier = generateRandomNumberFromRangeDouble(0.6, 1.4);
         this.prize = (int)(flightLength * basicMultiplier * additionalPrizeMultiplier * expBoost);
+        this.finalPrize = this.prize;
+    }
+
+    private void generateSalaries(){
+        for (Staff element : plane.getStaffList()) {
+            salaries += element.getSalary();
+        }
+        finalPrize -= salaries;
     }
 
     private void generateExp(){
@@ -41,4 +54,23 @@ public class Flight {
         this.exp = (int)(flightLength * expBoost * additionalExpMultiplier * basicMultiplier);
     }
 
+    public int getFlightLength() {
+        return flightLength;
+    }
+
+    public int getSalaries() {
+        return salaries;
+    }
+
+    public int getPrize() {
+        return prize;
+    }
+
+    public int getFinalPrize() {
+        return finalPrize;
+    }
+
+    public int getExp() {
+        return exp;
+    }
 }
