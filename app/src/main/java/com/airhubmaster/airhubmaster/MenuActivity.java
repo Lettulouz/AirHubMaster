@@ -17,7 +17,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.animation.ValueAnimator;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.InsetDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -115,6 +117,8 @@ public class MenuActivity extends AppCompatActivity {
                 dialogLogout.show();
             } else if (item.getItemId() == R.id.deleteAccountSideIcon) {
                 dialogDelete.show();
+            } else if (item.getItemId() == R.id.termsSideIcon) {
+                termOpen();
             }
             return false;
         });
@@ -210,6 +214,17 @@ public class MenuActivity extends AppCompatActivity {
         super.onPause();
         dialogDelete.dismiss();
         dialogLogout.dismiss();
+    }
+
+    //==============================================================================================
+
+    /**
+     * The method responsible for opening the hyperlink of the application rule terms
+     */
+    public void termOpen() {
+        Uri uri = Uri.parse("https://airhubmaster.com/privacy");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
 
     //==============================================================================================
