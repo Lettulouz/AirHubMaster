@@ -5,9 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 public class Staff {
-    public static int drawOneStat() {
+    public static int drawOneStat(List<Integer> scales) {
         int[] range = {1, 20, 40, 60, 80, 100};
-        List<Integer> scales = Arrays.asList(40, 25, 20, 10, 4, 1);
 
         int sumOfScales = 0;
         for (int scale : scales) {
@@ -37,7 +36,7 @@ public class Staff {
         if(drawNumber==100){
             int randNumHun = rand.nextInt(15);
             if(randNumHun != 1){
-                return drawOneStat();
+                return drawOneStat(scales);
             }
         }
 
