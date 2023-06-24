@@ -15,6 +15,7 @@ import java.util.List;
 
 public class BuyPlaneAdapter extends RecyclerView.Adapter<BuyPlaneViewHolder> {
 
+    OnAcceptListener onAcceptListener;
     private List<PlaneShopDto> planeList;
 
     public BuyPlaneAdapter(List<PlaneShopDto> planeList) {
@@ -48,7 +49,9 @@ public class BuyPlaneAdapter extends RecyclerView.Adapter<BuyPlaneViewHolder> {
         });
 
         holder.buy_button.setOnClickListener(v -> {
-            // logika przycisku
+            if (onAcceptListener != null) {
+                onAcceptListener.onAcceptClick(plane.getPlaneName(), plane.getId(), plane.getPrice());
+            }
         });
     }
 
@@ -60,5 +63,9 @@ public class BuyPlaneAdapter extends RecyclerView.Adapter<BuyPlaneViewHolder> {
     public void updatePlanes(List<PlaneShopDto> planeDtos) {
         this.planeList = planeDtos;
         notifyDataSetChanged();
+    }
+
+    public void setOnAcceptListener(OnAcceptListener onAcceptListener) {
+        this.onAcceptListener = onAcceptListener;
     }
 }

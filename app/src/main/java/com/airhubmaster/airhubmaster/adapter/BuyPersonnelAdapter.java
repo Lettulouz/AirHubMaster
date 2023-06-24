@@ -15,6 +15,7 @@ import java.util.List;
 
 public class BuyPersonnelAdapter extends RecyclerView.Adapter<BuyPersonnelViewHolder> {
 
+    OnAcceptListener onAcceptListener;
     private List<PersonnelShopDto> personnelList;
 
     public BuyPersonnelAdapter(List<PersonnelShopDto> personnelList) {
@@ -51,7 +52,9 @@ public class BuyPersonnelAdapter extends RecyclerView.Adapter<BuyPersonnelViewHo
         });
 
         holder.hireButton.setOnClickListener(v -> {
-            // logika buttona
+            if (onAcceptListener != null) {
+                onAcceptListener.onAcceptClick(personnel.getFullName(), personnel.getId(), personnel.getPrice());
+            }
         });
     }
 
@@ -63,5 +66,9 @@ public class BuyPersonnelAdapter extends RecyclerView.Adapter<BuyPersonnelViewHo
     public void updatePersonnel(List<PersonnelShopDto> personnelDtoList) {
         this.personnelList = personnelDtoList;
         notifyDataSetChanged();
+    }
+
+    public void setOnAcceptListener(OnAcceptListener onAcceptListener) {
+        this.onAcceptListener = onAcceptListener;
     }
 }

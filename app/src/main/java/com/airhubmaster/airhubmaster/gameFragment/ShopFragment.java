@@ -4,11 +4,14 @@ import static com.airhubmaster.airhubmaster.interceptor.ApiInterceptor.tokenExpi
 import static com.airhubmaster.airhubmaster.utils.Constans.MESSAGE_ERROR_STANDARD;
 import static com.airhubmaster.airhubmaster.utils.Constans.URL_SERVER;
 
+import android.app.Dialog;
+import android.graphics.drawable.InsetDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,6 +43,16 @@ import okhttp3.Response;
 
 public class ShopFragment extends Fragment {
 
+    BuyPlaneAdapter buyPlaneAdapter;
+    BuyPersonnelAdapter buyPersonnelAdapter;
+    Dialog dialogPlane;
+    TextView textViewBodyPlane;
+    Button buttonPlaneAccept;
+    Button buttonPlanetCancel;
+    Dialog dialogPersonnel;
+    TextView textViewBodyPersonnel;
+    Button buttonPersonnelAccept;
+    Button buttonPersonnelCancel;
     UserLocalStore userLocalStore;
     private RecyclerView recyclerViewShop;
     private RecyclerView recyclerViewCategoryShop;
@@ -78,9 +91,9 @@ public class ShopFragment extends Fragment {
 //        personnelList.add(new PersonnelDto("Derek Chauvin", "Personel Naziemny", 40, 30, 40, 50));
 //        personnelList.add(new PersonnelDto("Bob Brown", "Personel Naziemny", 60, 80, 10, 20));
         categories = new ArrayList<>();
-        categories.add("Pilot");
-        categories.add("Stewardess");
-        categories.add("Personel naziemny");
+        categories.add("pilot");
+        categories.add("stewardessa");
+        categories.add("personel naziemny");
     }
 
     @Override
@@ -106,30 +119,61 @@ public class ShopFragment extends Fragment {
         recyclerViewCategoryShop.setLayoutManager(layoutManager);
         recyclerViewCategoryShop.setAdapter(categoryAdapter);
 
-        BuyPersonnelAdapter buypersonnelAdapter = new BuyPersonnelAdapter(personnelShopList);
-        recyclerViewShop.setAdapter(buypersonnelAdapter);
+        buyPersonnelAdapter = new BuyPersonnelAdapter(personnelShopList);
+        recyclerViewShop.setAdapter(buyPersonnelAdapter);
 
         buttonShowPersonel.setOnClickListener(v -> {
             categories.clear();
-            categories.add("Pilot");
-            categories.add("Stewardess");
-            categories.add("Personel naziemny");
+            categories.add("pilot");
+            categories.add("stewardessa");
+            categories.add("personel naziemny");
             categoryAdapter = new CategoryAdapter(getContext(), categories, this::filterItemsByCategory);
             recyclerViewCategoryShop.setAdapter(categoryAdapter);
-            recyclerViewShop.setAdapter(new BuyPersonnelAdapter(personnelShopList));
+            buyPersonnelAdapter = new BuyPersonnelAdapter(personnelShopList);
+            recyclerViewShop.setAdapter(buyPersonnelAdapter);
+
+            buyPersonnelAdapter.setOnAcceptListener((name, idItem, price) -> {
+                dialogPersonnel.show();
+                textViewBodyPersonnel.setText("Czy na pewno chcesz zatrudnić pracownika " + name + " za cene " + price + "?");
+            });
         });
 
         buttonShowPlane.setOnClickListener(v -> {
             categories.clear();
-            categories.add("Mikro");
-            categories.add("Małe");
-            categories.add("Standardowe");
-            categories.add("Duże");
-            categories.add("Jumbo");
+            categories.add("mikro");
+            categories.add("małe");
+            categories.add("standardowe");
+            categories.add("duże");
+            categories.add("jumbo");
             categoryAdapter = new CategoryAdapter(getContext(), categories, this::filterItemsByCategory);
             recyclerViewCategoryShop.setAdapter(categoryAdapter);
-            recyclerViewShop.setAdapter(new BuyPlaneAdapter(planeShopList));
+            buyPlaneAdapter = new BuyPlaneAdapter(planeShopList);
+            recyclerViewShop.setAdapter(buyPlaneAdapter);
+
+            buyPlaneAdapter.setOnAcceptListener((name, idItem, price) -> {
+                dialogPlane.show();
+                textViewBodyPlane.setText("Czy na pewno chcesz kupić samolot " + name + " za cene " + price + "?");
+            });
         });
+
+        setDialogHireWorker();
+        setDialogBuyPlane();
+        buttonPlaneAccept = dialogPlane.findViewById(R.id.buttonMarketPlaneAccept);
+        buttonPlanetCancel = dialogPlane.findViewById(R.id.buttonMarketPlaneCancel);
+        textViewBodyPlane = dialogPlane.findViewById(R.id.textViewMarketPlaneBody);
+        buttonPlanetCancel.setOnClickListener(v -> dialogPlane.dismiss());
+
+        buttonPersonnelAccept = dialogPersonnel.findViewById(R.id.buttonMarketPersonnelAccept);
+        buttonPersonnelCancel = dialogPersonnel.findViewById(R.id.buttonMarketPersonnelCancel);
+        textViewBodyPersonnel = dialogPersonnel.findViewById(R.id.textViewMarketPersonnelBody);
+        buttonPersonnelCancel.setOnClickListener(v -> dialogPersonnel.dismiss());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        dialogPlane.dismiss();
+        dialogPersonnel.dismiss();
     }
 
     private void filterItemsByCategory(String category) {
@@ -240,8 +284,8 @@ public class ShopFragment extends Fragment {
                     Type listType = TypeToken.getParameterized(List.class, PersonnelShopDto.class).getType();
                     personnelShopList = gson.fromJson(response.body().string(), listType);
                     getActivity().runOnUiThread(() -> {
-                        BuyPersonnelAdapter buypersonnelAdapter = new BuyPersonnelAdapter(personnelShopList);
-                        recyclerViewShop.setAdapter(buypersonnelAdapter);
+                        buyPersonnelAdapter = new BuyPersonnelAdapter(personnelShopList);
+                        recyclerViewShop.setAdapter(buyPersonnelAdapter);
                     });
                 } else {
                     getActivity().runOnUiThread(() -> Toast.makeText(getActivity(),
@@ -249,5 +293,35 @@ public class ShopFragment extends Fragment {
                 }
             }
         });
+    }
+
+    //==============================================================================================
+
+    /**
+     * The method responsible for create confirmed plane buy pop up dialog
+     */
+    public void setDialogBuyPlane() {
+        dialogPlane = new Dialog(getActivity());
+        dialogPlane.setContentView(R.layout.dialog_market_confirm_plane);
+        dialogPlane.getWindow().setBackgroundDrawable(getActivity().getDrawable(R.drawable.background_dialog));
+        dialogPlane.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        InsetDrawable inset = new InsetDrawable(getActivity().getDrawable(R.drawable.background_dialog), 32, 0, 32, 0);
+        dialogPlane.getWindow().setBackgroundDrawable(inset);
+        dialogPlane.setCancelable(true);
+    }
+
+    //==============================================================================================
+
+    /**
+     * The method responsible for create confirmed worker hire pop up dialog
+     */
+    public void setDialogHireWorker() {
+        dialogPersonnel = new Dialog(getActivity());
+        dialogPersonnel.setContentView(R.layout.dialog_market_confirm_personnel);
+        dialogPersonnel.getWindow().setBackgroundDrawable(getActivity().getDrawable(R.drawable.background_dialog));
+        dialogPersonnel.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        InsetDrawable inset = new InsetDrawable(getActivity().getDrawable(R.drawable.background_dialog), 32, 0, 32, 0);
+        dialogPersonnel.getWindow().setBackgroundDrawable(inset);
+        dialogPersonnel.setCancelable(true);
     }
 }
