@@ -10,15 +10,15 @@ public class Staff {
     protected String name;
     protected int maxSingle;
     protected StaffStats person;
-
     private int employmentCost;
     private int salary;
 
-    public void generateStaff(){
-        person.setCooperation(drawOneStat());
-        person.setExpirience(drawOneStat());
-        person.setSkills(drawOneStat());
-        person.setRebelliousness(drawOneStat(), maxSingle);
+    public void generateStaff(int level){
+        UserLevel userLevel = new UserLevel();
+        person.setCooperation(drawOneStat(userLevel.getSkillsAtLevelMap(level)));
+        person.setExpirience(drawOneStat(userLevel.getSkillsAtLevelMap(level)));
+        person.setSkills(drawOneStat(userLevel.getSkillsAtLevelMap(level)));
+        person.setRebelliousness(drawOneStat(userLevel.getSkillsAtLevelMap(level)), maxSingle);
     }
 
     public int getEmploymentCost() {

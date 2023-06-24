@@ -124,7 +124,7 @@ public class UserLevel {
         requiredExpMap.put(45, 100 * m);
         requiredExpMap.put(46, 120 * m);
         requiredExpMap.put(47, 150 * m);
-        requiredExpMap.put(48, 170 *m);
+        requiredExpMap.put(48, 170 * m);
         requiredExpMap.put(49, 200 * m);
         requiredExpMap.put(50, 250 * m);
 
@@ -193,6 +193,9 @@ public class UserLevel {
 
     public Map<Integer, Double> getExpBoostMap() {
         return expBoostMap;
+    }
+    public List<Integer> getSkillsAtLevelMap(int level) {
+        return staffBoostMap.get(level);
     }
 
     public int getExpAtLevel(int level){
