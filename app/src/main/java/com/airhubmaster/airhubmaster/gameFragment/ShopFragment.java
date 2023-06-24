@@ -17,6 +17,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,8 +26,10 @@ import com.airhubmaster.airhubmaster.R;
 import com.airhubmaster.airhubmaster.adapter.BuyPersonnelAdapter;
 import com.airhubmaster.airhubmaster.adapter.BuyPlaneAdapter;
 import com.airhubmaster.airhubmaster.adapter.CategoryAdapter;
+import com.airhubmaster.airhubmaster.dto.api.StandardMessageErrorDto;
 import com.airhubmaster.airhubmaster.dto.game.PersonnelShopDto;
 import com.airhubmaster.airhubmaster.dto.game.PlaneShopDto;
+import com.airhubmaster.airhubmaster.dto.game.ShopConfirmedPurchaseDto;
 import com.airhubmaster.airhubmaster.localDataBase.UserLocalStore;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -39,10 +43,13 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class ShopFragment extends Fragment {
 
+    int idPersonnel;
+    int idPlane;
     BuyPlaneAdapter buyPlaneAdapter;
     BuyPersonnelAdapter buyPersonnelAdapter;
     Dialog dialogPlane;
@@ -65,6 +72,8 @@ public class ShopFragment extends Fragment {
     private List<String> categories;
     private CategoryAdapter categoryAdapter;
     private String selectedCategory = null;
+    StandardMessageErrorDto standardMessageErrorDto;
+    ShopConfirmedPurchaseDto shopConfirmedPurchaseDto;
     private final Gson gson = new Gson();
 
     public ShopFragment() {
@@ -133,6 +142,7 @@ public class ShopFragment extends Fragment {
             recyclerViewShop.setAdapter(buyPersonnelAdapter);
 
             buyPersonnelAdapter.setOnAcceptListener((name, idItem, price) -> {
+                idPersonnel= idItem;
                 dialogPersonnel.show();
                 textViewBodyPersonnel.setText("Czy na pewno chcesz zatrudnić pracownika " + name + " za cene " + price + "?");
             });
@@ -151,6 +161,7 @@ public class ShopFragment extends Fragment {
             recyclerViewShop.setAdapter(buyPlaneAdapter);
 
             buyPlaneAdapter.setOnAcceptListener((name, idItem, price) -> {
+                idPlane = idItem;
                 dialogPlane.show();
                 textViewBodyPlane.setText("Czy na pewno chcesz kupić samolot " + name + " za cene " + price + "?");
             });
@@ -162,11 +173,13 @@ public class ShopFragment extends Fragment {
         buttonPlanetCancel = dialogPlane.findViewById(R.id.buttonMarketPlaneCancel);
         textViewBodyPlane = dialogPlane.findViewById(R.id.textViewMarketPlaneBody);
         buttonPlanetCancel.setOnClickListener(v -> dialogPlane.dismiss());
+        buttonPlaneAccept.setOnClickListener(v1 -> buyShopPlane(idPlane));
 
         buttonPersonnelAccept = dialogPersonnel.findViewById(R.id.buttonMarketPersonnelAccept);
         buttonPersonnelCancel = dialogPersonnel.findViewById(R.id.buttonMarketPersonnelCancel);
         textViewBodyPersonnel = dialogPersonnel.findViewById(R.id.textViewMarketPersonnelBody);
         buttonPersonnelCancel.setOnClickListener(v -> dialogPersonnel.dismiss());
+        buttonPersonnelAccept.setOnClickListener(v1 -> buyShopWorker(idPersonnel));
     }
 
     @Override
@@ -293,6 +306,117 @@ public class ShopFragment extends Fragment {
                 }
             }
         });
+    }
+
+    //==============================================================================================
+
+    /**
+     * The method responsible for purchase and assigning the aircraft to the user account
+     */
+    private void buyShopPlane(int planeId) {
+        userLocalStore = UserLocalStore.getInstance(getActivity());
+
+        String url = URL_SERVER + "api/v1/shop/buy/plane/" + planeId;
+        RequestBody body = RequestBody.create("", null);
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .header("Authorization", "Bearer " + userLocalStore.getJwtUserToken())
+                .header("Connection", "close")
+                .header("Accept-language", "pl")
+                .header("User-Agent", "mobile")
+                .build();
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(tokenExpiredInterceptor(userLocalStore))
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                getActivity().runOnUiThread(() -> Toast.makeText(getActivity(),
+                        MESSAGE_ERROR_STANDARD, Toast.LENGTH_SHORT).show());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.code() == 201) {
+                    shopConfirmedPurchaseDto = gson.fromJson(response.body().string(), ShopConfirmedPurchaseDto.class);
+                    getActivity().runOnUiThread(() -> Toast.makeText(getActivity(),
+                            shopConfirmedPurchaseDto.getMessage(), Toast.LENGTH_SHORT).show());
+                    dialogPlane.dismiss();
+                    replaceFragment(new PlaneFragment());
+                } else if (response.code() == 400) {
+                    standardMessageErrorDto = gson.fromJson(response.body().string(), StandardMessageErrorDto.class);
+                    getActivity().runOnUiThread(() -> Toast.makeText(getActivity(),
+                            standardMessageErrorDto.getMessage(), Toast.LENGTH_SHORT).show());
+                } else {
+                    getActivity().runOnUiThread(() -> Toast.makeText(getActivity(),
+                            MESSAGE_ERROR_STANDARD, Toast.LENGTH_SHORT).show());
+                }
+            }
+        });
+    }
+
+    //==============================================================================================
+
+    /**
+     * The method responsible for hire and assigning the worker to the user account
+     */
+    private void buyShopWorker(int workerId) {
+        userLocalStore = UserLocalStore.getInstance(getActivity());
+
+        String url = URL_SERVER + "api/v1/shop/buy/worker/" + workerId;
+        RequestBody body = RequestBody.create("", null);
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .header("Authorization", "Bearer " + userLocalStore.getJwtUserToken())
+                .header("Connection", "close")
+                .header("Accept-language", "pl")
+                .header("User-Agent", "mobile")
+                .build();
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(tokenExpiredInterceptor(userLocalStore))
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                getActivity().runOnUiThread(() -> Toast.makeText(getActivity(),
+                        MESSAGE_ERROR_STANDARD, Toast.LENGTH_SHORT).show());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.code() == 201) {
+                    shopConfirmedPurchaseDto = gson.fromJson(response.body().string(), ShopConfirmedPurchaseDto.class);
+                    getActivity().runOnUiThread(() -> Toast.makeText(getActivity(),
+                            shopConfirmedPurchaseDto.getMessage(), Toast.LENGTH_SHORT).show());
+                    dialogPersonnel.dismiss();
+                    replaceFragment(new PersonnelFragment());
+                } else if (response.code() == 400) {
+                    standardMessageErrorDto = gson.fromJson(response.body().string(), StandardMessageErrorDto.class);
+                    getActivity().runOnUiThread(() -> Toast.makeText(getActivity(),
+                            standardMessageErrorDto.getMessage(), Toast.LENGTH_SHORT).show());
+                } else {
+                    getActivity().runOnUiThread(() -> Toast.makeText(getActivity(),
+                            MESSAGE_ERROR_STANDARD, Toast.LENGTH_SHORT).show());
+                }
+            }
+        });
+    }
+
+    //==============================================================================================
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayoutMenu, fragment);
+        fragmentTransaction.commit();
     }
 
     //==============================================================================================
