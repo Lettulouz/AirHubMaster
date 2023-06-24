@@ -68,7 +68,7 @@
                 android:layout_height="45dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="4dp"
-                android:src="@drawable/baseline_help_24"
+                android:src="@drawable/graphics_airplane_engine"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,7 +78,9 @@
                 android:layout_height="45dp"
                 android:layout_marginStart="62dp"
                 android:layout_marginTop="4dp"
-                android:src="@drawable/baseline_help_24"
+                android:scaleX="1.1"
+                android:scaleY="1.1"
+                android:src="@drawable/graphics_airplane_landinggear"
                 app:layout_constraintStart_toEndOf="@+id/icon_1"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -88,7 +90,7 @@
                 android:layout_height="45dp"
                 android:layout_marginStart="62dp"
                 android:layout_marginTop="4dp"
-                android:src="@drawable/baseline_help_24"
+                android:src="@drawable/graphics_airplane_wing"
                 app:layout_constraintStart_toEndOf="@+id/icon_2"
                 app:layout_constraintTop_toTopOf="parent" />
 

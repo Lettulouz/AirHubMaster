@@ -8,16 +8,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airhubmaster.airhubmaster.R;
-import com.airhubmaster.airhubmaster.dto.game.PersonnelDto;
+import com.airhubmaster.airhubmaster.dto.game.PersonnelShopDto;
 import com.airhubmaster.airhubmaster.viewHolder.BuyPersonnelViewHolder;
 
 import java.util.List;
 
 public class BuyPersonnelAdapter extends RecyclerView.Adapter<BuyPersonnelViewHolder> {
 
-    private List<PersonnelDto> personnelList;
+    private List<PersonnelShopDto> personnelList;
 
-    public BuyPersonnelAdapter(List<PersonnelDto> personnelList) {
+    public BuyPersonnelAdapter(List<PersonnelShopDto> personnelList) {
         this.personnelList = personnelList;
     }
 
@@ -31,10 +31,10 @@ public class BuyPersonnelAdapter extends RecyclerView.Adapter<BuyPersonnelViewHo
 
     @Override
     public void onBindViewHolder(@NonNull BuyPersonnelViewHolder holder, int position) {
-        PersonnelDto personnel = personnelList.get(position);
+        PersonnelShopDto personnel = personnelList.get(position);
 
-        holder.personCategory.setText(personnel.getCategory());
-        holder.personName.setText(personnel.getName());
+        holder.personCategory.setText(personnel.getCategoryName());
+        holder.personName.setText(personnel.getFullName());
         holder.fieldD.setText("D " + personnel.getExperience());
         holder.fieldU.setText("U " + personnel.getSkills());
         holder.fieldW.setText("W " + personnel.getCooperation());
@@ -60,7 +60,7 @@ public class BuyPersonnelAdapter extends RecyclerView.Adapter<BuyPersonnelViewHo
         return personnelList.size();
     }
 
-    public void updatePersonnel(List<PersonnelDto> personnelDtoList) {
+    public void updatePersonnel(List<PersonnelShopDto> personnelDtoList) {
         this.personnelList = personnelDtoList;
         notifyDataSetChanged();
     }

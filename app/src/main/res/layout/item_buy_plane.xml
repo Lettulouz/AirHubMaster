@@ -33,14 +33,24 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/plane_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cena: 0"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/plane_icon"
+            app:layout_constraintTop_toBottomOf="@+id/plane_name" />
+
+        <TextView
             android:id="@+id/plane_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:text="Kategoria"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/expand_button"
-            app:layout_constraintStart_toEndOf="@+id/plane_name"
             app:layout_constraintTop_toTopOf="@+id/plane_name" />
 
         <ImageButton

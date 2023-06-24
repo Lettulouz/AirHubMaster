@@ -1,23 +1,23 @@
 package com.airhubmaster.airhubmaster.adapter;
 
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-        import androidx.annotation.NonNull;
-        import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-        import com.airhubmaster.airhubmaster.R;
-        import com.airhubmaster.airhubmaster.dto.game.PlaneDto;
-        import com.airhubmaster.airhubmaster.viewHolder.BuyPlaneViewHolder;
+import com.airhubmaster.airhubmaster.R;
+import com.airhubmaster.airhubmaster.dto.game.PlaneShopDto;
+import com.airhubmaster.airhubmaster.viewHolder.BuyPlaneViewHolder;
 
-        import java.util.List;
+import java.util.List;
 
 public class BuyPlaneAdapter extends RecyclerView.Adapter<BuyPlaneViewHolder> {
 
-    private List<PlaneDto> planeList;
+    private List<PlaneShopDto> planeList;
 
-    public BuyPlaneAdapter(List<PlaneDto> planeList) {
+    public BuyPlaneAdapter(List<PlaneShopDto> planeList) {
         this.planeList = planeList;
     }
 
@@ -31,10 +31,11 @@ public class BuyPlaneAdapter extends RecyclerView.Adapter<BuyPlaneViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull BuyPlaneViewHolder holder, int position) {
-        PlaneDto plane = planeList.get(position);
+        PlaneShopDto plane = planeList.get(position);
 
-        holder.planeName.setText(plane.getName());
-        holder.planeCategory.setText(plane.getCategory());
+        holder.planeName.setText(plane.getPlaneName());
+        holder.planePrice.setText("Cena: " + String.valueOf(plane.getPrice()));
+        holder.planeCategory.setText(plane.getCategoryName());
 
         holder.expandButton.setOnClickListener(v -> {
             if (holder.upgradeLayout.getVisibility() == View.GONE) {
@@ -55,7 +56,8 @@ public class BuyPlaneAdapter extends RecyclerView.Adapter<BuyPlaneViewHolder> {
     public int getItemCount() {
         return planeList.size();
     }
-    public void updatePlanes(List<PlaneDto> planeDtos) {
+
+    public void updatePlanes(List<PlaneShopDto> planeDtos) {
         this.planeList = planeDtos;
         notifyDataSetChanged();
     }

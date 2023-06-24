@@ -15,6 +15,7 @@ public class BuyPlaneViewHolder extends RecyclerView.ViewHolder {
 
     public ImageView planeIcon;
     public TextView planeName;
+    public TextView planePrice;
     public TextView planeCategory;
     public ImageButton expandButton;
     public View upgradeLayout;
@@ -23,6 +24,7 @@ public class BuyPlaneViewHolder extends RecyclerView.ViewHolder {
     public BuyPlaneViewHolder(@NonNull View itemView) {
         super(itemView);
         planeIcon = itemView.findViewById(R.id.plane_icon);
+        planePrice = itemView.findViewById(R.id.plane_price);
         planeName = itemView.findViewById(R.id.plane_name);
         planeCategory = itemView.findViewById(R.id.plane_category);
         expandButton = itemView.findViewById(R.id.expand_button);
