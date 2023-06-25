@@ -90,6 +90,7 @@ public class MainFragment extends Fragment {
             new Handler().postDelayed(() -> {
                 imagePlane.setScaleX(1);
                 imagePlane.setScaleY(1);
+                replaceFragment(new ArrivalFragment());
             }, 150);
         });
 
