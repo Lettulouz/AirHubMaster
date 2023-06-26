@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airhubmaster.airhubmaster.R;
-import com.airhubmaster.airhubmaster.dto.game.PersonnelDto;
+import com.airhubmaster.airhubmaster.dto.game.PersonnelBoughtDto;
 import com.airhubmaster.airhubmaster.viewHolder.PersonnelViewHolder;
 
 import java.util.List;
@@ -21,10 +21,10 @@ public class PersonnelAdapter extends RecyclerView.Adapter<PersonnelViewHolder> 
     /**
      * Variable declaration
      */
-    private List<PersonnelDto> personnelDtoList;
+    private List<PersonnelBoughtDto> personnelBoughtDtoList;
 
-    public PersonnelAdapter(List<PersonnelDto> personnelDtoList) {
-        this.personnelDtoList = personnelDtoList;
+    public PersonnelAdapter(List<PersonnelBoughtDto> personnelBoughtDtoList) {
+        this.personnelBoughtDtoList = personnelBoughtDtoList;
     }
 
     @NonNull
@@ -36,9 +36,9 @@ public class PersonnelAdapter extends RecyclerView.Adapter<PersonnelViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull PersonnelViewHolder holder, int position) {
-        PersonnelDto personnelDto = personnelDtoList.get(position);
-        holder.personCategory.setText(personnelDto.getCategory());
-        holder.personName.setText(personnelDto.getName());
+        PersonnelBoughtDto personnelBoughtDto = personnelBoughtDtoList.get(position);
+        holder.personCategory.setText(personnelBoughtDto.getCategoryName());
+        holder.personName.setText(personnelBoughtDto.getFullName());
         holder.expandButton.setOnClickListener(v -> {
             if (holder.personStatsLayout.getVisibility() == View.GONE) {
                 holder.personStatsLayout.setVisibility(View.VISIBLE);
@@ -48,20 +48,20 @@ public class PersonnelAdapter extends RecyclerView.Adapter<PersonnelViewHolder> 
                 holder.expandButton.setBackgroundResource(R.drawable.expand_icon);
             }
         });
-        holder.fieldD.setText("D  " + personnelDto.getExperience());
-        holder.fieldU.setText("U  " + personnelDto.getSkills());
-        holder.fieldW.setText("W  " + personnelDto.getCooperation());
-        holder.fieldB.setText("B  " + personnelDto.getRebelliousness());
+        holder.fieldD.setText("D  " + personnelBoughtDto.getExperience());
+        holder.fieldU.setText("U  " + personnelBoughtDto.getSkills());
+        holder.fieldW.setText("W  " + personnelBoughtDto.getCooperation());
+        holder.fieldB.setText("B  " + personnelBoughtDto.getRebelliousness());
 
     }
 
     @Override
     public int getItemCount() {
-        return personnelDtoList.size();
+        return personnelBoughtDtoList.size();
     }
 
-    public void updatePersonnel(List<PersonnelDto> personnelDtoList) {
-        this.personnelDtoList = personnelDtoList;
+    public void updatePersonnel(List<PersonnelBoughtDto> personnelDtoList) {
+        this.personnelBoughtDtoList = personnelDtoList;
         notifyDataSetChanged();
     }
 }

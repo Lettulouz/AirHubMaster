@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airhubmaster.airhubmaster.R;
-import com.airhubmaster.airhubmaster.dto.game.PlaneDto;
+import com.airhubmaster.airhubmaster.dto.game.PlaneBoughtDto;
 import com.airhubmaster.airhubmaster.viewHolder.PlaneViewHolder;
 
 import java.util.List;
@@ -21,10 +21,10 @@ public class PlaneAdapter extends RecyclerView.Adapter<PlaneViewHolder> {
     /**
      * Variable declaration
      */
-    private List<PlaneDto> planeDtos;
+    private List<PlaneBoughtDto> personnelBoughtDtoList;
 
-    public PlaneAdapter(List<PlaneDto> planeDtos) {
-        this.planeDtos = planeDtos;
+    public PlaneAdapter(List<PlaneBoughtDto> personnelBoughtDtoList) {
+        this.personnelBoughtDtoList = personnelBoughtDtoList;
     }
 
     @Override
@@ -35,10 +35,10 @@ public class PlaneAdapter extends RecyclerView.Adapter<PlaneViewHolder> {
 
     @Override
     public void onBindViewHolder(PlaneViewHolder holder, int position) {
-        PlaneDto planeDto = planeDtos.get(position);
-        holder.planeName.setText(planeDto.getName());
-        holder.planeCategory.setText(planeDto.getCategory());
-        holder.upgradeLevel.setText(holder.itemView.getContext().getString(R.string.upgrade_level, planeDto.getUpgradeLevel()));
+        PlaneBoughtDto planeBoughtDto = personnelBoughtDtoList.get(position);
+        holder.planeName.setText(planeBoughtDto.getPlaneName());
+        holder.planeCategory.setText(planeBoughtDto.getCategoryName());
+        holder.upgradeLevel.setText(holder.itemView.getContext().getString(R.string.upgrade_level, planeBoughtDto.getUpgrade()));
         holder.expandButton.setOnClickListener(v -> {
             if (holder.upgradeLayout.getVisibility() == View.GONE) {
                 holder.upgradeLayout.setVisibility(View.VISIBLE);
@@ -50,12 +50,12 @@ public class PlaneAdapter extends RecyclerView.Adapter<PlaneViewHolder> {
         });
 
         holder.itemView.findViewById(R.id.upgrade_button).setOnClickListener(v -> {
-            planeDto.upgrade();
-            holder.upgradeLevel.setText(holder.itemView.getContext().getString(R.string.upgrade_level, planeDto.getUpgradeLevel()));
-            updateLevelImages(holder, planeDto.getUpgradeLevel());
+            planeBoughtDto.upgrade();
+            holder.upgradeLevel.setText(holder.itemView.getContext().getString(R.string.upgrade_level, planeBoughtDto.getUpgrade()));
+            updateLevelImages(holder, planeBoughtDto.getUpgrade());
         });
 
-        updateLevelImages(holder, planeDto.getUpgradeLevel());
+        updateLevelImages(holder, planeBoughtDto.getUpgrade());
     }
 
     private void updateLevelImages(PlaneViewHolder holder, int level) {
@@ -67,11 +67,11 @@ public class PlaneAdapter extends RecyclerView.Adapter<PlaneViewHolder> {
 
     @Override
     public int getItemCount() {
-        return planeDtos.size();
+        return personnelBoughtDtoList.size();
     }
 
-    public void updatePlanes(List<PlaneDto> planeDtos) {
-        this.planeDtos = planeDtos;
+    public void updatePlanes(List<PlaneBoughtDto> planeDtos) {
+        this.personnelBoughtDtoList = planeDtos;
         notifyDataSetChanged();
     }
 }
