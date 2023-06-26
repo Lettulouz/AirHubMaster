@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="69"
+                android:text="1"
                 android:textAlignment="center"
                 android:textColor="#FFC107"
                 android:textSize="40sp"
@@ -72,18 +72,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewLevelStatus" />
 
             <TextView
-                android:id="@+id/nameEditText"
+                android:id="@+id/textViewNameProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/edittext_rounded_background"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:hint="Jan Kowalski"
                 android:padding="8dp"
+                android:text="Jan Kowalski"
                 android:textAlignment="center"
-                android:textColor="#000000"
-                android:textColorHint="#FFC107"
+                android:textColor="#FFC107"
                 android:textSize="26sp"
                 android:textStyle="normal|bold"
                 app:layout_constraintEnd_toEndOf="@+id/levelProgressBar"
@@ -91,26 +90,26 @@
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
             <TextView
-                android:id="@+id/loginEditText"
+                android:id="@+id/textViewLoginProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/edittext_rounded_background"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:hint="testowlogin123"
                 android:padding="8dp"
+                android:text="testowlogin123"
                 android:textAlignment="center"
-                android:textColor="#000000"
+                android:textColor="#FFC107"
                 android:textColorHint="#FFC107"
                 android:textSize="26sp"
                 android:textStyle="normal|bold"
                 app:layout_constraintEnd_toEndOf="@+id/levelProgressBar"
                 app:layout_constraintStart_toStartOf="@+id/levelProgressBar"
-                app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewNameProfile" />
 
             <TextView
-                android:id="@+id/emailEditText"
+                android:id="@+id/textViewEmailProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -118,24 +117,24 @@
                 android:background="@drawable/edittext_rounded_background"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:hint="testowymail@posl.pl"
                 android:padding="8dp"
+                android:text="testowymail@posl.pl"
                 android:textAlignment="center"
-                android:textColor="#000000"
+                android:textColor="#FFC107"
                 android:textColorHint="#FFC107"
                 android:textSize="26sp"
                 android:textStyle="normal|bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/levelProgressBar"
                 app:layout_constraintStart_toStartOf="@+id/levelProgressBar"
-                app:layout_constraintTop_toBottomOf="@+id/loginEditText" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewLoginProfile" />
 
             <TextView
                 android:id="@+id/textViewLevelStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="4200 / 6900 exp"
+                android:text="0 / 25 exp"
                 android:textColor="#FFC107"
                 android:textSize="20sp"
                 android:textStyle="bold"

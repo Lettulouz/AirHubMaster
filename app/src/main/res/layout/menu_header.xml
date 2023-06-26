@@ -16,7 +16,7 @@
         app:tint="#808080" />
 
     <TextView
-        android:id="@+id/textViewSideBarUser"
+        android:id="@+id/textViewSideBarUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autoSizeMinTextSize="25dp"
@@ -26,10 +26,10 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textVieaw5"
+        android:id="@+id/textViewSideBarUserLevel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Poziom konta: 69"
+        android:text="Poziom konta: 1"
         android:textColor="@color/black"
         android:textSize="16sp" />
 </LinearLayout>

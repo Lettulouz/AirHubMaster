@@ -20,7 +20,7 @@
         android:foregroundGravity="left"
         android:gravity="center"
         android:paddingHorizontal="10dp"
-        android:text="42334269"
+        android:text="1000"
         android:textAllCaps="false"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"

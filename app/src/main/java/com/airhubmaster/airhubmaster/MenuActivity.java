@@ -28,12 +28,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airhubmaster.airhubmaster.databinding.ActivityMenuBinding;
 import com.airhubmaster.airhubmaster.dto.api.DeleteUserAccountRequestDto;
 import com.airhubmaster.airhubmaster.dto.api.DeleteUserAccountResponseDto;
 import com.airhubmaster.airhubmaster.dto.api.LogoutResponseDto;
+import com.airhubmaster.airhubmaster.dto.api.ProfileResponseDto;
 import com.airhubmaster.airhubmaster.dto.api.StandardMessageErrorDto;
 import com.airhubmaster.airhubmaster.gameFragment.MainFragment;
 import com.airhubmaster.airhubmaster.gameFragment.PersonnelFragment;
@@ -82,6 +84,7 @@ public class MenuActivity extends AppCompatActivity {
     FloatingActionButton airportButton;
     ActivityMenuBinding binding;
     UserLocalStore userLocalStore;
+    ProfileResponseDto profileResponseDto;
     LogoutResponseDto logoutResponseDto;
     StandardMessageErrorDto standardMessageErrorDto;
     DeleteUserAccountRequestDto deleteUserAccountRequestDto;
@@ -168,6 +171,14 @@ public class MenuActivity extends AppCompatActivity {
     //==============================================================================================
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        getDataProfile();
+    }
+
+    //==============================================================================================
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
@@ -184,12 +195,6 @@ public class MenuActivity extends AppCompatActivity {
         MenuItem itemButton = menu.findItem(R.id.buttonCurrencyBar);
         View view = itemButton.getActionView();
         buttonMarket = view.findViewById(R.id.currencyButton);
-        ValueAnimator animator = ValueAnimator.ofInt(0, 69420);
-        animator.addUpdateListener(valueAnimator -> {
-            animator.setDuration(1500);
-            buttonMarket.setText(valueAnimator.getAnimatedValue().toString());
-        });
-        animator.start();
         buttonMarket.setOnClickListener(v -> {
             replaceFragment(new ShopFragment());
         });
@@ -340,6 +345,64 @@ public class MenuActivity extends AppCompatActivity {
                     runOnUiThread(() -> {
                         inputPasswordDeleteLayout.setErrorEnabled(true);
                         inputPasswordDeleteLayout.setError(MESSAGE_AUTHENTICATION);
+                    });
+                } else {
+                    runOnUiThread(() -> Toast.makeText(MenuActivity.this,
+                            MESSAGE_ERROR_STANDARD, Toast.LENGTH_SHORT).show());
+                }
+            }
+        });
+    }
+
+    //==============================================================================================
+
+    /**
+     * The method responsible for downloading user profile data
+     */
+    private void getDataProfile() {
+        userLocalStore = UserLocalStore.getInstance(MenuActivity.this);
+
+        String url = URL_SERVER + "api/v1/account/details";
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .header("Authorization", "Bearer " + userLocalStore.getJwtUserToken())
+                .header("Connection", "close")
+                .header("Accept-language", "pl")
+                .header("User-Agent", "mobile")
+                .build();
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(tokenExpiredInterceptor(userLocalStore))
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                runOnUiThread(() -> Toast.makeText(MenuActivity.this,
+                        MESSAGE_ERROR_STANDARD, Toast.LENGTH_SHORT).show());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.code() == 200) {
+                    profileResponseDto = gson.fromJson(response.body().string(), ProfileResponseDto.class);
+                    runOnUiThread(() -> {
+
+                        ValueAnimator animator = ValueAnimator.ofInt(0, profileResponseDto.getMoney());
+                        animator.addUpdateListener(valueAnimator -> {
+                            animator.setDuration(1500);
+                            buttonMarket.setText(valueAnimator.getAnimatedValue().toString());
+                        });
+                        animator.start();
+
+                        View headerView = navigationView.getHeaderView(0);
+                        TextView textHeaderMenuName = headerView.findViewById(R.id.textViewSideBarUserName);
+                        TextView textHeaderMenuLvl = headerView.findViewById(R.id.textViewSideBarUserLevel);
+                        textHeaderMenuName.setText(profileResponseDto.getFirstName() + " " + profileResponseDto.getLastName());
+                        textHeaderMenuLvl.setText("Poziom konta: " + String.valueOf(profileResponseDto.getLevel()));
                     });
                 } else {
                     runOnUiThread(() -> Toast.makeText(MenuActivity.this,
