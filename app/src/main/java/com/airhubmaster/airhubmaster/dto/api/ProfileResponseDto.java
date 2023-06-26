@@ -18,9 +18,13 @@ public class ProfileResponseDto {
     int level;
     int exp;
     int money;
+    int fromLevel;
+    int toLevel;
     Date accountCreated;
 
-    public ProfileResponseDto(String firstName, String lastName, String login, String emailAddress, String role, int level, int exp, int money, Date accountCreated) {
+    public ProfileResponseDto(String firstName, String lastName, String login,
+                              String emailAddress, String role, int level, int exp,
+                              int money, int fromLevel, int toLevel, Date accountCreated) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
@@ -29,6 +33,8 @@ public class ProfileResponseDto {
         this.level = level;
         this.exp = exp;
         this.money = money;
+        this.fromLevel = fromLevel;
+        this.toLevel = toLevel;
         this.accountCreated = accountCreated;
     }
 
@@ -94,6 +100,22 @@ public class ProfileResponseDto {
 
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    public int getFromLevel() {
+        return fromLevel;
+    }
+
+    public void setFromLevel(int fromLevel) {
+        this.fromLevel = fromLevel;
+    }
+
+    public int getToLevel() {
+        return toLevel;
+    }
+
+    public void setToLevel(int toLevel) {
+        this.toLevel = toLevel;
     }
 
     public Date getAccountCreated() {

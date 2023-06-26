@@ -132,17 +132,16 @@ public class ProfileFragment extends Fragment {
                                 .setDuration(1000)
                                 .start();
 
-                        ValueAnimator animator = ValueAnimator.ofInt(0, profileResponseDto.getExp());
+                        ValueAnimator animator = ValueAnimator.ofInt(profileResponseDto.getFromLevel(), profileResponseDto.getExp());
                         animator.addUpdateListener(valueAnimator -> {
                             animator.setDuration(1000);
-                            textLevelAnimatedExp.setText(valueAnimator.getAnimatedValue().toString() + " / 25 exp");
+                            textLevelAnimatedExp.setText(valueAnimator.getAnimatedValue().toString() + " / " + profileResponseDto.getToLevel() + "exp");
                         });
                         animator.start();
 
                         textHeaderMenuName.setText(profileResponseDto.getFirstName() + " " + profileResponseDto.getLastName());
                         textHeaderMenuLvl.setText("Poziom konta: " + String.valueOf(profileResponseDto.getLevel()));
                     });
-
                 } else {
                     getActivity().runOnUiThread(() -> Toast.makeText(getActivity(),
                             MESSAGE_ERROR_STANDARD, Toast.LENGTH_SHORT).show());
