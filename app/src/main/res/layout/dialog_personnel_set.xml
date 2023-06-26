@@ -128,6 +128,32 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutSetPilot"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Wybierz pilotów"
+                app:errorEnabled="true"
+                app:errorTextColor="@color/red"
+                app:expandedHintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutSetPlane"
+                app:startIconDrawable="@drawable/baseline_supervisor_account_24">
+
+                <AutoCompleteTextView
+                    android:id="@+id/spinnerSetPilot"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutSetStewardess"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
@@ -141,7 +167,7 @@
                 app:expandedHintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutSetPlane"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutSetPilot"
                 app:startIconDrawable="@drawable/baseline_supervisor_account_24">
 
                 <AutoCompleteTextView
