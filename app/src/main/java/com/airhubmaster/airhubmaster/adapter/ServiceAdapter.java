@@ -8,16 +8,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airhubmaster.airhubmaster.R;
-import com.airhubmaster.airhubmaster.dto.game.PlaneDto;
+import com.airhubmaster.airhubmaster.dto.game.PlaneServiceDto;
 import com.airhubmaster.airhubmaster.viewHolder.ServiceViewHolder;
 
 import java.util.List;
 
 public class ServiceAdapter extends RecyclerView.Adapter<ServiceViewHolder> {
-    private List<PlaneDto> planeList;
+    private List<PlaneServiceDto> planeServiceDtoList;
 
-    public ServiceAdapter(List<PlaneDto> planeList) {
-        this.planeList = planeList;
+    public ServiceAdapter(List<PlaneServiceDto> planeServiceDtoList) {
+        this.planeServiceDtoList = planeServiceDtoList;
     }
 
     @NonNull
@@ -29,14 +29,17 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ServiceViewHolder holder, int position) {
-        PlaneDto plane = planeList.get(position);
-        holder.planeName.setText(plane.getName());
-        holder.planeCategory.setText(plane.getCategory());
+        PlaneServiceDto planeServiceDto = planeServiceDtoList.get(position);
+        holder.planeName.setText(planeServiceDto.getName());
+        holder.planeCategory.setText(planeServiceDto.getCategoryName());
 
         holder.expandButton.setOnClickListener(v -> {
             if (holder.serviceLayout.getVisibility() == View.GONE) {
                 holder.serviceLayout.setVisibility(View.VISIBLE);
                 holder.expandButton.setBackgroundResource(R.drawable.collapse_icon);
+                holder.engine.setText(String.valueOf(planeServiceDto.getEngine()) + "%");
+                holder.gear.setText(String.valueOf(planeServiceDto.getLandingGeer()) + "%");
+                holder.wing.setText(String.valueOf(planeServiceDto.getWings()) + "%");
             } else {
                 holder.serviceLayout.setVisibility(View.GONE);
                 holder.expandButton.setBackgroundResource(R.drawable.expand_icon);
@@ -46,11 +49,11 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceViewHolder> {
 
     @Override
     public int getItemCount() {
-        return planeList.size();
+        return planeServiceDtoList.size();
     }
 
-    public void updatePlanes(List<PlaneDto> planeDtos) {
-        this.planeList = planeDtos;
+    public void updatePlanes(List<PlaneServiceDto> planeServiceDtoList) {
+        this.planeServiceDtoList = planeServiceDtoList;
         notifyDataSetChanged();
     }
 }

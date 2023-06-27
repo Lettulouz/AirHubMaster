@@ -95,7 +95,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/percentage_1"
+                android:id="@+id/percentage_engine_service"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="40dp"
@@ -109,7 +109,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/icon_1" />
 
             <TextView
-                android:id="@+id/percentage_2"
+                android:id="@+id/percentage_gear_service"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="62dp"
@@ -119,11 +119,11 @@
                 android:text="80%"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/percentage_1"
+                app:layout_constraintStart_toEndOf="@+id/percentage_engine_service"
                 app:layout_constraintTop_toBottomOf="@+id/icon_2" />
 
             <TextView
-                android:id="@+id/percentage_3"
+                android:id="@+id/percentage_wing_service"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="62dp"
@@ -133,7 +133,7 @@
                 android:text="70%"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/percentage_2"
+                app:layout_constraintStart_toEndOf="@+id/percentage_gear_service"
                 app:layout_constraintTop_toBottomOf="@+id/icon_3" />
 
             <Button
@@ -149,7 +149,7 @@
                 android:textSize="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/percentage_1"
+                app:layout_constraintTop_toBottomOf="@+id/percentage_engine_service"
                 app:layout_constraintVertical_bias="1.0"
                 tools:ignore="TextSizeCheck" />
 
@@ -166,7 +166,7 @@
                 android:textSize="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/repair_btn_1"
-                app:layout_constraintTop_toBottomOf="@+id/percentage_2"
+                app:layout_constraintTop_toBottomOf="@+id/percentage_gear_service"
                 app:layout_constraintVertical_bias="1.0"
                 tools:ignore="TextSizeCheck" />
 
@@ -183,7 +183,7 @@
                 android:textSize="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/repair_btn_2"
-                app:layout_constraintTop_toBottomOf="@+id/percentage_3"
+                app:layout_constraintTop_toBottomOf="@+id/percentage_wing_service"
                 app:layout_constraintVertical_bias="1.0"
                 tools:ignore="TextSizeCheck" />
 
