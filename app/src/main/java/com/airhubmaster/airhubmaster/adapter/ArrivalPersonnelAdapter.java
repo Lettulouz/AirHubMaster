@@ -4,13 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airhubmaster.airhubmaster.R;
-import com.airhubmaster.airhubmaster.dto.game.PersonnelDto;
+import com.airhubmaster.airhubmaster.dto.game.PersonnelBoughtDto;
 import com.airhubmaster.airhubmaster.viewHolder.ArrivalPersonnelViewHolder;
 
 import java.util.List;
@@ -18,11 +17,11 @@ import java.util.List;
 public class ArrivalPersonnelAdapter extends RecyclerView.Adapter<ArrivalPersonnelViewHolder> {
 
     private Context context;
-    private List<PersonnelDto> personnelDtoList;
+    private List<PersonnelBoughtDto> personnelBoughtDtoList;
 
-    public ArrivalPersonnelAdapter(Context context, List<PersonnelDto> personnelDtoList) {
+    public ArrivalPersonnelAdapter(Context context, List<PersonnelBoughtDto> personnelBoughtDtoList) {
         this.context = context;
-        this.personnelDtoList = personnelDtoList;
+        this.personnelBoughtDtoList = personnelBoughtDtoList;
     }
 
     @NonNull
@@ -34,13 +33,13 @@ public class ArrivalPersonnelAdapter extends RecyclerView.Adapter<ArrivalPersonn
 
     @Override
     public void onBindViewHolder(@NonNull ArrivalPersonnelViewHolder holder, int position) {
-        PersonnelDto personnelDto = personnelDtoList.get(position);
-        holder.nameTextView.setText(personnelDto.getName());
-        holder.categoryTextView.setText(personnelDto.getCategory());
+        PersonnelBoughtDto personnelBoughtDto = personnelBoughtDtoList.get(position);
+        holder.nameTextView.setText(personnelBoughtDto.getFullName());
+        holder.categoryTextView.setText(personnelBoughtDto.getCategoryName());
     }
 
     @Override
     public int getItemCount() {
-        return personnelDtoList.size();
+        return personnelBoughtDtoList.size();
     }
 }

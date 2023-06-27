@@ -10,20 +10,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airhubmaster.airhubmaster.R;
-import com.airhubmaster.airhubmaster.dto.game.PersonnelDto;
-import com.airhubmaster.airhubmaster.dto.game.PlaneDto;
+import com.airhubmaster.airhubmaster.dto.game.PlaneArrivalDto;
 import com.airhubmaster.airhubmaster.viewHolder.ArrivalViewHolder;
 
-import java.util.ArrayList;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ArrivalAdapter extends RecyclerView.Adapter<ArrivalViewHolder> {
 
-    private List<PlaneDto> planeDtoList;
+    private List<PlaneArrivalDto> planeArrivalDtoList;
     private Context context;
 
-    public ArrivalAdapter(Context context, List<PlaneDto> planeDtoList) {
-        this.planeDtoList = planeDtoList;
+    public ArrivalAdapter(Context context, List<PlaneArrivalDto> planeArrivalDtoList) {
+        this.planeArrivalDtoList = planeArrivalDtoList;
         this.context = context;
     }
 
@@ -36,10 +36,27 @@ public class ArrivalAdapter extends RecyclerView.Adapter<ArrivalViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ArrivalViewHolder holder, int position) {
-        PlaneDto planeDto = planeDtoList.get(position);
-        holder.planeNameTextView.setText(planeDto.getName());
-        holder.arrival_dateTextView.setText("Data przylotu: 11.10.2001 9:59"); // Placeholder dla daty przylotu
-        holder.planeCategoryTextView.setText(planeDto.getCategory());
+        PlaneArrivalDto planeArrivalDto = planeArrivalDtoList.get(position);
+        holder.planeNameTextView.setText(planeArrivalDto.getName());
+        DateTimeFormatter formatterFirts = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            formatterFirts = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+        }
+        ZonedDateTime zonedDateTime = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            zonedDateTime = ZonedDateTime.parse(planeArrivalDto.getArrival(), formatterFirts);
+        }
+
+        DateTimeFormatter formatter = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+        }
+        String formattedDateTime = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            formattedDateTime = zonedDateTime.format(formatter);
+        }
+        holder.arrival_dateTextView.setText("Data przylotu: " + formattedDateTime); // Placeholder dla daty przylotu
+        holder.planeCategoryTextView.setText(planeArrivalDto.getCategoryName());
         holder.personnel_recycler_view.setLayoutManager(new LinearLayoutManager(context));
 
         holder.expandButton.setOnClickListener(v -> {
@@ -52,24 +69,17 @@ public class ArrivalAdapter extends RecyclerView.Adapter<ArrivalViewHolder> {
             }
         });
 
-        // Inicjalizuj personnel_list_view i ustaw adapter dla niego
-        List<PersonnelDto> personnelDtoList = new ArrayList<>();
-        personnelDtoList.add(new PersonnelDto("Grzegorz Floryda", "Pilot", 69, 10, 20, 30));
-        personnelDtoList.add(new PersonnelDto("Jane Smith", "Stweardessa", 80, 50, 70, 90));
-        personnelDtoList.add(new PersonnelDto("Derek Chauvin", "Personel Naziemny", 40, 30, 40, 50));
-        personnelDtoList.add(new PersonnelDto("Bob Brown", "Personel Naziemny", 60, 80, 10, 20));
-
-        ArrivalPersonnelAdapter adapter = new ArrivalPersonnelAdapter(context, personnelDtoList);
+        ArrivalPersonnelAdapter adapter = new ArrivalPersonnelAdapter(context, planeArrivalDto.getWorkers());
         holder.personnel_recycler_view.setAdapter(adapter);
     }
 
     @Override
     public int getItemCount() {
-        return planeDtoList.size();
+        return planeArrivalDtoList.size();
     }
 
-    public void updatePlanes(List<PlaneDto> planeDtos) {
-        this.planeDtoList = planeDtos;
+    public void updatePlanes(List<PlaneArrivalDto> planeArrivalDtoList) {
+        this.planeArrivalDtoList = planeArrivalDtoList;
         notifyDataSetChanged();
     }
 }
