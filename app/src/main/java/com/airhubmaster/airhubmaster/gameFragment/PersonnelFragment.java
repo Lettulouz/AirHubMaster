@@ -74,7 +74,7 @@ public class PersonnelFragment extends Fragment {
 
         categories = new ArrayList<>();
         categories.add("pilot");
-        categories.add("stewardess");
+        categories.add("stewardessa");
         categories.add("personel naziemny");
 
         categoryAdapter = new CategoryAdapter(getContext(), categories, this::filterPersonnelByCategory);

@@ -1,4 +1,5 @@
 package com.airhubmaster.airhubmaster.viewHolder;
+
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
@@ -11,18 +12,18 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airhubmaster.airhubmaster.R;
-import com.airhubmaster.airhubmaster.dto.game.PlaneDto;
 
 public class SendPlaneViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+    public TextView textViewRout1, textViewRout2, textViewRout3;
     public TextView planeName, upgradeLevel, planeCategory;
     public ImageButton expandButton;
     public ConstraintLayout upgradeLayout;
-    private Button button_route_1;
-    private Button send_plane;
-    private Button button_route_2;
-    private Button button_route_3;
-    private Context context;
+    public Button button_route_1;
+    public Button send_plane;
+    public Button button_route_2;
+    public Button button_route_3;
+    public Context context;
 
     public SendPlaneViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
@@ -35,6 +36,9 @@ public class SendPlaneViewHolder extends RecyclerView.ViewHolder implements View
         button_route_1 = itemView.findViewById(R.id.button_route_1);
         button_route_2 = itemView.findViewById(R.id.button_route_2);
         button_route_3 = itemView.findViewById(R.id.button_route_3);
+        textViewRout1 = itemView.findViewById(R.id.duration_text_1);
+        textViewRout2 = itemView.findViewById(R.id.duration_text_2);
+        textViewRout3 = itemView.findViewById(R.id.duration_text_3);
 
         button_route_1.setOnClickListener(this);
         button_route_2.setOnClickListener(this);

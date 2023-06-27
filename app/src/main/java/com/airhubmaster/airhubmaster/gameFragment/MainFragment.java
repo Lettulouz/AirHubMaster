@@ -262,7 +262,7 @@ public class MainFragment extends Fragment {
     private void getPersonnel() {
         userLocalStore = UserLocalStore.getInstance(getActivity());
 
-        String url = URL_SERVER + "api/v1/game/crew";
+        String url = URL_SERVER + "api/v1/crew";
         Request request = new Request.Builder()
                 .url(url)
                 .get()
@@ -346,7 +346,7 @@ public class MainFragment extends Fragment {
         userLocalStore = UserLocalStore.getInstance(getActivity());
         SetPersonnelRequestDto setPersonnelRequestDto = new SetPersonnelRequestDto(planeId, workersId);
 
-        String url = URL_SERVER + "api/v1/game/crew";
+        String url = URL_SERVER + "api/v1/crew";
         RequestBody body = RequestBody.create(gson.toJson(setPersonnelRequestDto), Constans.JSON);
         Request request = new Request.Builder()
                 .url(url)
@@ -373,8 +373,11 @@ public class MainFragment extends Fragment {
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.code() == 201) {
                     standardMessageErrorDto = gson.fromJson(response.body().string(), StandardMessageErrorDto.class);
-                    getActivity().runOnUiThread(() -> Toast.makeText(getActivity(),
-                            standardMessageErrorDto.getMessage(), Toast.LENGTH_SHORT).show());
+                    getActivity().runOnUiThread(() -> {
+                        Toast.makeText(getActivity(),
+                                standardMessageErrorDto.getMessage(), Toast.LENGTH_SHORT).show();
+                        replaceFragment(new DepartureFragment());
+                    });
                 } else if (response.code() == 404) {
                     standardMessageErrorDto = gson.fromJson(response.body().string(), StandardMessageErrorDto.class);
                     getActivity().runOnUiThread(() -> Toast.makeText(getActivity(),
