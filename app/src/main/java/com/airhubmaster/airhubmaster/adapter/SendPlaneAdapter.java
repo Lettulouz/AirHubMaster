@@ -42,9 +42,9 @@ public class SendPlaneAdapter extends RecyclerView.Adapter<SendPlaneViewHolder> 
         holder.planeCategory.setText(planeSetRoutDto.getPlaneCategory());
         holder.expandButton.setOnClickListener(v -> {
             if (holder.upgradeLayout.getVisibility() == View.GONE) {
-                holder.textViewRout1.setText("Długość lotu: " + String.valueOf(planeSetRoutDto.getRoutes().get(0).getHours()) + "h");
-                holder.textViewRout2.setText("Długość lotu: " + String.valueOf(planeSetRoutDto.getRoutes().get(1).getHours()) + "h");
-                holder.textViewRout3.setText("Długość lotu: " + String.valueOf(planeSetRoutDto.getRoutes().get(2).getHours()) + "h");
+                holder.textViewRout1.setText("Czas lotu: " + String.valueOf(planeSetRoutDto.getRoutes().get(0).getHours()) + "h");
+                holder.textViewRout2.setText("Czas lotu: " + String.valueOf(planeSetRoutDto.getRoutes().get(1).getHours()) + "h");
+                holder.textViewRout3.setText("Czas lotu: " + String.valueOf(planeSetRoutDto.getRoutes().get(2).getHours()) + "h");
                 holder.button_route_1.setOnClickListener(v15 -> {
                     routId = planeSetRoutDto.getRoutes().get(0).getId();
                     holder.button_route_1.setBackgroundColor(ContextCompat.getColor(context, R.color.level_active_color));

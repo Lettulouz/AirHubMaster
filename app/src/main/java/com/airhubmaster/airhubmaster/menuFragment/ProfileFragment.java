@@ -135,7 +135,7 @@ public class ProfileFragment extends Fragment {
                         ValueAnimator animator = ValueAnimator.ofInt(profileResponseDto.getFromLevel(), profileResponseDto.getExp());
                         animator.addUpdateListener(valueAnimator -> {
                             animator.setDuration(1000);
-                            textLevelAnimatedExp.setText(valueAnimator.getAnimatedValue().toString() + " / " + profileResponseDto.getToLevel() + "exp");
+                            textLevelAnimatedExp.setText(valueAnimator.getAnimatedValue().toString() + " / " + profileResponseDto.getToLevel() + " exp");
                         });
                         animator.start();
 
