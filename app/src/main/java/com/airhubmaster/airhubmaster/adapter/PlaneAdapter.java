@@ -71,6 +71,11 @@ public class PlaneAdapter extends RecyclerView.Adapter<PlaneViewHolder> {
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
     public int getItemCount() {
         return personnelBoughtDtoList.size();
     }

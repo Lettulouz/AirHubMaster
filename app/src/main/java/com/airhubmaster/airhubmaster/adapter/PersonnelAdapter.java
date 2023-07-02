@@ -61,6 +61,11 @@ public class PersonnelAdapter extends RecyclerView.Adapter<PersonnelViewHolder> 
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
     public int getItemCount() {
         return personnelBoughtDtoList.size();
     }
