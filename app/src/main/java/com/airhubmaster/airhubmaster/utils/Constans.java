@@ -1,5 +1,10 @@
 package com.airhubmaster.airhubmaster.utils;
 
+import android.os.Build;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import okhttp3.MediaType;
 
 /**
@@ -22,5 +27,27 @@ public class Constans {
     //==============================================================================================
 
     private Constans() {
+    }
+
+    //==============================================================================================
+
+    /**
+     * @param date String containing local datetime format
+     * @return A formatted date string
+     */
+    public static String parseJsonDate(String date) {
+        DateTimeFormatter formatter = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss[.SSSSSSSSS][.SSSSSSSS]");
+        }
+        LocalDateTime localDate = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            localDate = LocalDateTime.parse(date, formatter);
+        }
+        String dateArrival = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            dateArrival = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(localDate);
+        }
+        return dateArrival;
     }
 }

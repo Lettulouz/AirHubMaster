@@ -30,7 +30,9 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/person_icon"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:drawablePadding="4dp"
+            app:drawableLeftCompat="@drawable/baseline_check_24" />
 
         <TextView
             android:id="@+id/person_name"

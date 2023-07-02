@@ -39,6 +39,11 @@ public class PersonnelAdapter extends RecyclerView.Adapter<PersonnelViewHolder> 
         PersonnelBoughtDto personnelBoughtDto = personnelBoughtDtoList.get(position);
         holder.personCategory.setText(personnelBoughtDto.getCategoryName());
         holder.personName.setText(personnelBoughtDto.getFullName());
+        if (!personnelBoughtDto.isAvailable()) {
+            holder.personCategory.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_custom_ticket_is_available, 0, 0, 0);
+        } else {
+            holder.personCategory.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_check_24, 0, 0, 0);
+        }
         holder.expandButton.setOnClickListener(v -> {
             if (holder.personStatsLayout.getVisibility() == View.GONE) {
                 holder.personStatsLayout.setVisibility(View.VISIBLE);

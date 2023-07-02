@@ -3,6 +3,7 @@ package com.airhubmaster.airhubmaster.gameFragment;
 import static com.airhubmaster.airhubmaster.interceptor.ApiInterceptor.tokenExpiredInterceptor;
 import static com.airhubmaster.airhubmaster.utils.Constans.MESSAGE_ERROR_STANDARD;
 import static com.airhubmaster.airhubmaster.utils.Constans.URL_SERVER;
+import static com.airhubmaster.airhubmaster.utils.Constans.parseJsonDate;
 
 import android.app.Dialog;
 import android.graphics.drawable.InsetDrawable;
@@ -37,8 +38,6 @@ import com.airhubmaster.airhubmaster.utils.Constans;
 import com.google.gson.Gson;
 
 import java.io.IOException;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -278,23 +277,6 @@ public class DepartureFragment extends Fragment {
                         expGainDialog.setText("+" + String.valueOf(planeSendResponseDto.getAddedExp()) + "xp");
                         balanceDialog.setText("Stan konta: " + String.valueOf(planeSendResponseDto.getAccountDeposit()) + "$");
 
-                        DateTimeFormatter formatterFirts = null;
-                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                            formatterFirts = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
-                        }
-                        ZonedDateTime zonedDateTime = null;
-                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                            zonedDateTime = ZonedDateTime.parse(planeSendResponseDto.getArrival(), formatterFirts);
-                        }
-
-                        DateTimeFormatter formatter = null;
-                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                            formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-                        }
-                        String formattedDateTime = null;
-                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                            formattedDateTime = zonedDateTime.format(formatter);
-                        }
                         beforeProgress.setMax((int) planeSendResponseDto.getToLevel());
                         beforeProgress.setProgress((int) planeSendResponseDto.getCurrentExp());
 
@@ -304,7 +286,7 @@ public class DepartureFragment extends Fragment {
                             isLvlDialog.setVisibility(View.VISIBLE);
                             currentProgress.setProgress((int) planeSendResponseDto.getToLevel());
                         }
-                        arrivalDataDialog.setText("Przylot: " + formattedDateTime);
+                        arrivalDataDialog.setText("Przylot: " + parseJsonDate(planeSendResponseDto.getArrival()));
                     });
                 } else if (response.code() == 404) {
                     standardMessageErrorDto = gson.fromJson(response.body().string(), StandardMessageErrorDto.class);

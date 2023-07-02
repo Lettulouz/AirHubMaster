@@ -36,6 +36,11 @@ public class PlaneAdapter extends RecyclerView.Adapter<PlaneViewHolder> {
     @Override
     public void onBindViewHolder(PlaneViewHolder holder, int position) {
         PlaneBoughtDto planeBoughtDto = personnelBoughtDtoList.get(position);
+        if (!planeBoughtDto.isAvailable()) {
+            holder.planeName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_custom_ticket_is_available, 0, 0, 0);
+        } else {
+            holder.planeName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_check_24, 0, 0, 0);
+        }
         holder.planeName.setText(planeBoughtDto.getPlaneName());
         holder.planeCategory.setText(planeBoughtDto.getCategoryName());
         holder.upgradeLevel.setText(holder.itemView.getContext().getString(R.string.upgrade_level, planeBoughtDto.getUpgrade()));

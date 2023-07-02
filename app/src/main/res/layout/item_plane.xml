@@ -29,6 +29,8 @@
             android:text="Nazwa samolotu"
             android:textColor="@color/black"
             android:textSize="18sp"
+            android:drawablePadding="4dp"
+            app:drawableLeftCompat="@drawable/baseline_check_24"
             app:layout_constraintStart_toEndOf="@+id/plane_icon"
             app:layout_constraintTop_toTopOf="parent" />
 
