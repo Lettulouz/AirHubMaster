@@ -4,6 +4,7 @@ import static com.airhubmaster.airhubmaster.interceptor.ApiInterceptor.tokenExpi
 import static com.airhubmaster.airhubmaster.utils.Constans.MESSAGE_ERROR_STANDARD;
 import static com.airhubmaster.airhubmaster.utils.Constans.URL_SERVER;
 
+import com.airhubmaster.airhubmaster.MenuActivity;
 import com.airhubmaster.airhubmaster.adapter.CategoryAdapter;
 import com.airhubmaster.airhubmaster.adapter.PlaneAdapter;
 import com.airhubmaster.airhubmaster.dto.game.PlaneBoughtDto;
@@ -13,6 +14,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +39,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class PlaneFragment extends Fragment {
+
+    Bundle bundle;
+    String currentMoney;
     private RecyclerView recyclerView;
     private PlaneAdapter adapter;
     //private List<PlaneDto> planeDtoList;
@@ -60,6 +65,18 @@ public class PlaneFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        bundle = this.getArguments();
+        if (bundle != null) {
+            currentMoney = bundle.getString("money");
+            MenuActivity activity = (MenuActivity) getActivity();
+            ValueAnimator animator = ValueAnimator.ofInt
+                    (Integer.parseInt(activity.buttonMarket.getText().toString()), Integer.parseInt(currentMoney));
+            animator.addUpdateListener(valueAnimator -> {
+                animator.setDuration(1500);
+                activity.buttonMarket.setText(valueAnimator.getAnimatedValue().toString());
+            });
+            animator.start();
+        }
         getBoughtPlane();
     }
 

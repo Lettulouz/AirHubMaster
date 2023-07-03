@@ -299,6 +299,11 @@ public class ShopFragment extends Fragment {
                     getActivity().runOnUiThread(() -> {
                         buyPersonnelAdapter = new BuyPersonnelAdapter(personnelShopList);
                         recyclerViewShop.setAdapter(buyPersonnelAdapter);
+                        buyPersonnelAdapter.setOnAcceptListener((name, idItem, price) -> {
+                            idPersonnel= idItem;
+                            dialogPersonnel.show();
+                            textViewBodyPersonnel.setText("Czy na pewno chcesz zatrudnić pracownika " + name + " za cene " + price + "?");
+                        });
                     });
                 } else {
                     getActivity().runOnUiThread(() -> Toast.makeText(getActivity(),
@@ -346,7 +351,7 @@ public class ShopFragment extends Fragment {
                     getActivity().runOnUiThread(() -> Toast.makeText(getActivity(),
                             shopConfirmedPurchaseDto.getMessage(), Toast.LENGTH_SHORT).show());
                     dialogPlane.dismiss();
-                    replaceFragment(new PlaneFragment());
+                    replaceFragment(new PlaneFragment(), String.valueOf(shopConfirmedPurchaseDto.getMoneyAfterTransact()));
                 } else if (response.code() == 400) {
                     standardMessageErrorDto = gson.fromJson(response.body().string(), StandardMessageErrorDto.class);
                     getActivity().runOnUiThread(() -> Toast.makeText(getActivity(),
@@ -397,7 +402,7 @@ public class ShopFragment extends Fragment {
                     getActivity().runOnUiThread(() -> Toast.makeText(getActivity(),
                             shopConfirmedPurchaseDto.getMessage(), Toast.LENGTH_SHORT).show());
                     dialogPersonnel.dismiss();
-                    replaceFragment(new PersonnelFragment());
+                    replaceFragment(new PersonnelFragment(), String.valueOf(shopConfirmedPurchaseDto.getMoneyAfterTransact()));
                 } else if (response.code() == 400) {
                     standardMessageErrorDto = gson.fromJson(response.body().string(), StandardMessageErrorDto.class);
                     getActivity().runOnUiThread(() -> Toast.makeText(getActivity(),
@@ -412,9 +417,12 @@ public class ShopFragment extends Fragment {
 
     //==============================================================================================
 
-    private void replaceFragment(Fragment fragment) {
+    private void replaceFragment(Fragment fragment, String money) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putString("money", money);
+        fragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.frameLayoutMenu, fragment);
         fragmentTransaction.commit();
     }

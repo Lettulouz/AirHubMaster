@@ -77,7 +77,7 @@ public class MenuActivity extends AppCompatActivity {
     Button buttonDeleteCancel;
     TextInputEditText inputPasswordDelete;
     TextInputLayout inputPasswordDeleteLayout;
-    Button buttonMarket;
+    public Button buttonMarket;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ActionBarDrawerToggle drawerToggle;
