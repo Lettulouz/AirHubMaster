@@ -10,6 +10,7 @@ public class ProfileResponseDto {
     /**
      * Variable declaration
      */
+    int id;
     String firstName;
     String lastName;
     String login;
@@ -36,6 +37,14 @@ public class ProfileResponseDto {
         this.fromLevel = fromLevel;
         this.toLevel = toLevel;
         this.accountCreated = accountCreated;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {

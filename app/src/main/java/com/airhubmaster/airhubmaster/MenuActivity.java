@@ -43,6 +43,7 @@ import com.airhubmaster.airhubmaster.gameFragment.PlaneFragment;
 import com.airhubmaster.airhubmaster.gameFragment.ServiceFragment;
 import com.airhubmaster.airhubmaster.gameFragment.ShopFragment;
 import com.airhubmaster.airhubmaster.localDataBase.UserLocalStore;
+import com.airhubmaster.airhubmaster.menuFragment.InventoryFragment;
 import com.airhubmaster.airhubmaster.menuFragment.ProfileFragment;
 import com.airhubmaster.airhubmaster.menuFragment.UserDataFragment;
 import com.airhubmaster.airhubmaster.utils.Constans;
@@ -120,6 +121,10 @@ public class MenuActivity extends AppCompatActivity {
                 dialogLogout.show();
             } else if (item.getItemId() == R.id.deleteAccountSideIcon) {
                 dialogDelete.show();
+            }
+            else if (item.getItemId() == R.id.inventorySideIcon) {
+                checkMenu();
+                replaceFragment(new InventoryFragment());
             } else if (item.getItemId() == R.id.termsSideIcon) {
                 termOpen();
             }

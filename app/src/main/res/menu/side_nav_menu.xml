@@ -7,6 +7,10 @@
             android:icon="@drawable/baseline_supervisor_account_24"
             android:title="Profil" />
         <item
+            android:id="@+id/inventorySideIcon"
+            android:icon="@drawable/baseline_inventory_24"
+            android:title="Ekwipunek" />
+        <item
             android:id="@+id/helpSideIcon"
             android:icon="@drawable/baseline_help_24"
             android:title="Pomoc" />
