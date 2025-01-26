@@ -446,4 +446,10 @@ public class MenuActivity extends AppCompatActivity {
         dialogDelete.getWindow().setBackgroundDrawable(inset);
         dialogDelete.setCancelable(true);
     }
+
+    //==============================================================================================
+
+    public Button getCurrencyButton() {
+        return buttonMarket;
+    }
 }
